@@ -20,7 +20,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient((services) =>
         {
-            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite002.db3"));
+            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite001.db3"));
         });
 
         return builder.Build();

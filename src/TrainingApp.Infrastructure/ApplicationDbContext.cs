@@ -1,13 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TrainingApp.Infrastructure.Entities;
+using TrainingApp.Application.Entities;
+using TrainingApp.Application.Entities.Workout;
+using TrainingApp.Infrastructure.Configurations;
 
 namespace TrainingApp.Infrastructure;
 
 public class ApplicationDbContext : DbContext
 {
 
-    public DbSet<Author> Authors { get; set; }
-    public DbSet<Book> Books { get; set; }
+    public DbSet<Metric> Metrics { get; set; }
+
+    public DbSet<Excercise> Excercises { get; set; }
+
+    public DbSet<Set> Sets { get; set; }
+
+    public DbSet<Workout> Workouts{ get; set; }
+
+    public DbSet<Workouts2Excersices> Workouts2Excersices { get; set; }
+
+    public DbSet<WorkoutTemplate> WorkoutTemplates { get; set; }
+
+    public DbSet<WorkoutTemplates2Excercises> WorkoutTemplates2Excercises { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.ApplyConfiguration(new ExcercisesConfiguration());
+        builder.ApplyConfiguration(new MetricsConfiguration());
+        builder.ApplyConfiguration(new SetsConfiguration());
+        builder.ApplyConfiguration(new Workouts2ExcersicesConfiguration());
+        builder.ApplyConfiguration(new WorkoutsConfiguration());
+        builder.ApplyConfiguration(new WorkoutTemplates2ExcercisesConfiguration());
+        builder.ApplyConfiguration(new WorkoutTemplatesConfiguration());
+    }
 
     /// <summary>
     /// Constructor for creating migrations
