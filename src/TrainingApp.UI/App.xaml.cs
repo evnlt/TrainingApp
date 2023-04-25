@@ -1,6 +1,6 @@
 ﻿namespace TrainingApp.UI;
 
-public partial class App : Application
+public partial class App : Microsoft.Maui.Controls.Application
 {
     public static IServiceProvider Services { get; protected set; }
 

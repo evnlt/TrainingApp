@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using TrainingApp.Infrastructure;
+using TrainingApp.UI.ViewModels;
+using TrainingApp.UI.Views;
 
 namespace TrainingApp.UI;
 
@@ -22,6 +24,9 @@ public static class MauiProgram
         {
             return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite001.db3"));
         });
+
+        builder.Services.AddSingleton<HomeViewModel>();
+        builder.Services.AddSingleton<MainPage>();
 
         return builder.Build();
     }
