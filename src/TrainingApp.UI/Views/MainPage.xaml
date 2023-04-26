@@ -2,14 +2,40 @@
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
     x:Class="TrainingApp.UI.Views.MainPage"
+    x:DataType="viewmodel:HomeViewModel"
     Title="Home">
 
     <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Button 
+                Text="←"
+                Clicked="OnDayBeforeClicked"
+                HorizontalOptions="Start"/>
+            
+            <DatePicker 
+                x:Name="DatePicker"
+                MinimumDate="01/01/2023"
+                Date="{Binding SelectedDate}"
+                HorizontalOptions="Center"
+                DateSelected="DatePicker_DateSelected"/>
+
+            <Button 
+                Text="→"
+                Clicked="OnDayAfterClicked"
+                HorizontalOptions="End"/>
+
+
+        </HorizontalStackLayout>
+        
+
+
         <Label 
-            Text="Home content"
+            Text="{Binding SelectedDate}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        
     </VerticalStackLayout>
 
 

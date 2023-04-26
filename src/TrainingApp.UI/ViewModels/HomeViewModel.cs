@@ -1,9 +1,13 @@
-﻿namespace TrainingApp.UI.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class HomeViewModel : BaseViewModel
+namespace TrainingApp.UI.ViewModels;
+
+public partial class HomeViewModel : BaseViewModel
 {
+    [ObservableProperty]
+    private DateTime _selectedDate = DateTime.Today;
+
     public HomeViewModel()
     {
-        Title = "Custom";
     }
 }
