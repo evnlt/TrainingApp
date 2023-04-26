@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using TrainingApp.Application.Entities;
 using TrainingApp.Application.Entities.Workout;
 using TrainingApp.Infrastructure.Configurations;
@@ -33,6 +34,30 @@ public class ApplicationDbContext : DbContext
         builder.ApplyConfiguration(new WorkoutsConfiguration());
         builder.ApplyConfiguration(new WorkoutTemplates2ExcercisesConfiguration());
         builder.ApplyConfiguration(new WorkoutTemplatesConfiguration());
+
+        builder.Entity<Workout>().HasData(
+        new Workout
+        {
+            Name = "Abs",
+            Notes = "This is a note",
+            Date = DateTime.Today,
+            IsDone = false
+        },
+        new Workout
+        {
+            Name = "Pull",
+            Notes = "This is a note",
+            Date = DateTime.Today,
+            IsDone = false
+        },
+        new Workout
+        {
+            Name = "Abs",
+            Notes = "This is another note",
+            Date = DateTime.Today.AddDays(-1),
+            IsDone = true
+        }
+    );
     }
 
     /// <summary>
@@ -40,7 +65,7 @@ public class ApplicationDbContext : DbContext
     /// </summary>
     public ApplicationDbContext()
     {
-        File = Path.Combine("./", "UsedByMigratorOnly1.db3");
+        File = Path.Combine("./", "UsedByMigratorOnly2.db3");
         Initialize();
     }
 

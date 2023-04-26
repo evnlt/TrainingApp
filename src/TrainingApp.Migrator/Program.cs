@@ -2,7 +2,12 @@
 
 Console.WriteLine("Migrator running..");
 
-using (var blogContext = new ApplicationDbContext())
+using (var db = new ApplicationDbContext())
 {
-    var all = blogContext.Excercises.ToList();
+    var all = db.Workouts.ToList();
+
+    foreach (var workout in all)
+    {
+        Console.WriteLine(workout.Date + " " + workout.Name);
+    }
 }

@@ -14,7 +14,7 @@ public class WorkoutTemplate
 
     public bool InUse { get; set; }
 
-    public ICollection<WorkoutTemplates2Excercises> WorkoutTemplates2Excercises { get; set; } = default!;
+    public ICollection<WorkoutTemplates2Excercises>? WorkoutTemplates2Excercises { get; set; } = default!;
 
-    public ICollection<Workout> Workouts { get; set; } = default!;
+    public ICollection<Workout>? Workouts { get; set; } = default!;
 }

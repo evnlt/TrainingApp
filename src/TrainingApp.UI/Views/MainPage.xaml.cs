@@ -10,9 +10,11 @@ public partial class MainPage : ContentPage
 
     public MainPage(HomeViewModel viewModel)
     {
+        vm = viewModel;
+
         InitializeComponent();
         BindingContext = viewModel;
-        vm = viewModel;
+
         datePicker = (DatePicker)FindByName("DatePicker");
     }
 

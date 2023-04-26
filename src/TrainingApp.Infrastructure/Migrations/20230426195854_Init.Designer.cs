@@ -11,8 +11,8 @@ using TrainingApp.Infrastructure;
 namespace TrainingApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230415101710_Initial")]
-    partial class Initial
+    [Migration("20230426195854_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,11 +106,16 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.Property<bool>("IsDone")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Notes")
                         .HasMaxLength(1000)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("WorkoutTemplateId")
+                    b.Property<Guid?>("WorkoutTemplateId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -118,6 +123,32 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasIndex("WorkoutTemplateId");
 
                     b.ToTable("Workouts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("87bc36c8-e0e3-49dd-9a1a-41196207b1c9"),
+                            Date = new DateTime(2023, 4, 26, 0, 0, 0, 0, DateTimeKind.Local),
+                            IsDone = false,
+                            Name = "Abs",
+                            Notes = "This is a note"
+                        },
+                        new
+                        {
+                            Id = new Guid("8b4db2a6-b47a-41d9-b53b-f15501a20185"),
+                            Date = new DateTime(2023, 4, 26, 0, 0, 0, 0, DateTimeKind.Local),
+                            IsDone = false,
+                            Name = "Pull",
+                            Notes = "This is a note"
+                        },
+                        new
+                        {
+                            Id = new Guid("d25b4add-4f97-4a3e-9bec-90f7708d6d5e"),
+                            Date = new DateTime(2023, 4, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            IsDone = true,
+                            Name = "Abs",
+                            Notes = "This is another note"
+                        });
                 });
 
             modelBuilder.Entity("TrainingApp.Application.Entities.Workout.WorkoutTemplate", b =>
@@ -209,9 +240,7 @@ namespace TrainingApp.Infrastructure.Migrations
                 {
                     b.HasOne("TrainingApp.Application.Entities.Workout.WorkoutTemplate", "WorkoutTemplate")
                         .WithMany("Workouts")
-                        .HasForeignKey("WorkoutTemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WorkoutTemplateId");
 
                     b.Navigation("WorkoutTemplate");
                 });

@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TrainingApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,7 +63,8 @@ namespace TrainingApp.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    WorkoutTemplateId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    WorkoutTemplateId = table.Column<Guid>(type: "TEXT", nullable: true),
                     Notes = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IsDone = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -73,8 +76,7 @@ namespace TrainingApp.Infrastructure.Migrations
                         name: "FK_Workouts_WorkoutTemplates_WorkoutTemplateId",
                         column: x => x.WorkoutTemplateId,
                         principalTable: "WorkoutTemplates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +150,16 @@ namespace TrainingApp.Infrastructure.Migrations
                         principalTable: "Workout_Excercises",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Workouts",
+                columns: new[] { "Id", "Date", "IsDone", "Name", "Notes", "WorkoutTemplateId" },
+                values: new object[,]
+                {
+                    { new Guid("87bc36c8-e0e3-49dd-9a1a-41196207b1c9"), new DateTime(2023, 4, 26, 0, 0, 0, 0, DateTimeKind.Local), false, "Abs", "This is a note", null },
+                    { new Guid("8b4db2a6-b47a-41d9-b53b-f15501a20185"), new DateTime(2023, 4, 26, 0, 0, 0, 0, DateTimeKind.Local), false, "Pull", "This is a note", null },
+                    { new Guid("d25b4add-4f97-4a3e-9bec-90f7708d6d5e"), new DateTime(2023, 4, 25, 0, 0, 0, 0, DateTimeKind.Local), true, "Abs", "This is another note", null }
                 });
 
             migrationBuilder.CreateIndex(

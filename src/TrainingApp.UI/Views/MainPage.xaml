@@ -3,9 +3,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
+    xmlns:model="clr-namespace:TrainingApp.Application.Entities.Workout;assembly=TrainingApp.Application"
     x:Class="TrainingApp.UI.Views.MainPage"
     x:DataType="viewmodel:HomeViewModel"
-    Title="Home">
+    Title="{Binding Title}">
 
     <VerticalStackLayout>
         <HorizontalStackLayout>
@@ -13,7 +14,7 @@
                 Text="←"
                 Clicked="OnDayBeforeClicked"
                 HorizontalOptions="Start"/>
-            
+
             <DatePicker 
                 x:Name="DatePicker"
                 MinimumDate="01/01/2023"
@@ -28,14 +29,28 @@
 
 
         </HorizontalStackLayout>
-        
-
 
         <Label 
             Text="{Binding SelectedDate}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         
+        
+        <ContentView>
+            <CollectionView
+                    ItemsSource="{Binding Workouts}"
+                    SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Workout">
+                        <Grid Padding="10">
+                            <Label Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ContentView>
+
     </VerticalStackLayout>
 
 
