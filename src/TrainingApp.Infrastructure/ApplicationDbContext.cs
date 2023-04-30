@@ -15,7 +15,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Set> Sets { get; set; }
 
-    public DbSet<Workout> Workouts{ get; set; }
+    public DbSet<Workout> Workouts { get; set; }
 
     public DbSet<Workouts2Excersices> Workouts2Excersices { get; set; }
 
@@ -56,8 +56,27 @@ public class ApplicationDbContext : DbContext
             Notes = "This is another note",
             Date = DateTime.Today.AddDays(-1),
             IsDone = true
-        }
-    );
+        });
+
+        builder.Entity<Excercise>().HasData(
+        new Excercise
+        {
+            Name = "Pullups",
+            IsBuiltIn = true,
+            InUse = true
+        },
+        new Excercise
+        {
+            Name = "Ab curl",
+            IsBuiltIn = true,
+            InUse = true
+        },
+        new Excercise
+        {
+            Name = "Custom 1",
+            IsBuiltIn = false,
+            InUse = true
+        });
     }
 
     /// <summary>
@@ -65,7 +84,7 @@ public class ApplicationDbContext : DbContext
     /// </summary>
     public ApplicationDbContext()
     {
-        File = Path.Combine("./", "UsedByMigratorOnly2.db3");
+        File = Path.Combine("./", "UsedByMigratorOnly3.db3");
         Initialize();
     }
 

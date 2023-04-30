@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingApp.UI.Views.BuiltInExercisesPage"
+             xmlns:model="clr-namespace:TrainingApp.Application.Entities.Workout;assembly=TrainingApp.Application"
+             xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
+             x:DataType="viewmodel:BuiltInExercisesViewModel"
+             Title="Excercises">
+
+    <VerticalStackLayout>
+        <Label 
+            Text="Built-In exercises content"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <ContentView>
+            <CollectionView
+                    ItemsSource="{Binding Excercises}"
+                    SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Excercise">
+                        <Grid Padding="10">
+                            <Label Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ContentView>
+    </VerticalStackLayout>
+
+</ContentPage>

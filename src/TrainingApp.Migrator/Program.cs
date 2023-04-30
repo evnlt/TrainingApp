@@ -4,10 +4,19 @@ Console.WriteLine("Migrator running..");
 
 using (var db = new ApplicationDbContext())
 {
-    var all = db.Workouts.ToList();
+    var workouts = db.Workouts.ToList();
 
-    foreach (var workout in all)
+    foreach (var workout in workouts)
     {
         Console.WriteLine(workout.Date + " " + workout.Name);
+    }
+
+    Console.WriteLine("\n");
+
+    var excercises = db.Excercises.ToList();
+
+    foreach (var excercise in excercises)
+    {
+        Console.WriteLine(excercise.Name + " " + excercise.IsBuiltIn);
     }
 }

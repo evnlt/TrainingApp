@@ -1,21 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--<Shell
-    x:Class="TrainingApp.UI.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:TrainingApp.UI.Views"
-    Shell.FlyoutBehavior="Disabled">
-
-    -->
-<!--<ShellContent
-        Title="{Binding Title}"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />-->
-<!--
-
-
-</Shell>-->
-
 <Shell
     x:Class="TrainingApp.UI.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -109,47 +92,23 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-    <!--<ShellItem Route="LoginPage" FlyoutItemIsVisible="False">
-        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>
-    </ShellItem>-->
-
     <FlyoutItem Title="Home">
-        <FlyoutItem.Icon>
-            <FontImageSource FontFamily="FAS"
-                             Color="Black"/>
-        </FlyoutItem.Icon>
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     </FlyoutItem>
 
 
     <FlyoutItem Title="Excercises">
-        <FlyoutItem.Icon>
-            <FontImageSource FontFamily="FAS"
-                             Color="Black"/>
-        </FlyoutItem.Icon>
-        <ShellContent ContentTemplate="{DataTemplate local:ExcercisesPage}" Route="ExcercisesPage" />
-        <Tab Title="Excercises">
-            <Tab.Icon>
-                <FontImageSource FontFamily="FAS"/>
-            </Tab.Icon>
-            <ShellContent Title="Built-in" ContentTemplate="{DataTemplate local:ExcercisesPage}" Route="ExcercisesPage" />
-            <ShellContent Title="Custom" ContentTemplate="{DataTemplate local:ExcercisesPage}" Route="ExcercisesPage2" />
+        <Tab Title="Excercises custom">
+            <ShellContent Title="Built-in" ContentTemplate="{DataTemplate local:BuiltInExercisesPage}"/>
+            <ShellContent Title="Custom" ContentTemplate="{DataTemplate local:CustomExercisesPage}" />
         </Tab>
     </FlyoutItem>
 
     <FlyoutItem Title="Workout plans">
-        <FlyoutItem.Icon>
-            <FontImageSource FontFamily="FAS"
-                             Color="Black"/>
-        </FlyoutItem.Icon>
         <ShellContent ContentTemplate="{DataTemplate local:PlansPage}" Route="PlansPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="Workouts">
-        <FlyoutItem.Icon>
-            <FontImageSource FontFamily="FAS"
-                             Color="Black"/>
-        </FlyoutItem.Icon>
         <ShellContent ContentTemplate="{DataTemplate local:WorkoutsPage}" Route="WorkoutsPage" />
     </FlyoutItem>
 </Shell>

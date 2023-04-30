@@ -8,10 +8,6 @@ public class Excercise
 
     public string? Description { get; set; } 
 
-    //public int Image { get; set; } // TODO - image
-
-    //public int Video { get; set; } // TODO - video
-
     public bool IsBuiltIn { get; set; }
 
     public bool InUse { get; set; }

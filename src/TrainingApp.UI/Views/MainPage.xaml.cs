@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
         vm = viewModel;
 
         InitializeComponent();
-        BindingContext = viewModel;
+        BindingContext = vm;
 
         datePicker = (DatePicker)FindByName("DatePicker");
     }
