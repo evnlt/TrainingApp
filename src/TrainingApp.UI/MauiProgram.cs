@@ -37,6 +37,9 @@ public static class MauiProgram
         builder.Services.AddTransient<AddCustomExcerciseViewModel>();
         builder.Services.AddTransient<AddCustomExcercisePage>();
 
+        builder.Services.AddTransient<WorkoutViewModel>();
+        builder.Services.AddTransient<WorkoutPage>();
+
         return builder.Build();
     }
 }

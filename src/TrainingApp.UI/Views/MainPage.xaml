@@ -27,15 +27,8 @@
                 Clicked="OnDayAfterClicked"
                 HorizontalOptions="End"/>
 
-
         </HorizontalStackLayout>
 
-        <Label 
-            Text="{Binding SelectedDate}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-        
         <ContentView>
             <CollectionView
                     ItemsSource="{Binding Workouts}"
@@ -44,7 +37,14 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Workout">
                         <Grid Padding="10">
-                            <Label Text="{Binding Name}" />
+                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=GoToWorkoutCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Label Text="{Binding Name}" />
+                            </Frame>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

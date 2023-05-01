@@ -1,9 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using TrainingApp.Application.Entities.Workout;
 using TrainingApp.Infrastructure;
+using TrainingApp.UI.Views;
 
 namespace TrainingApp.UI.ViewModels;
 
@@ -41,12 +42,28 @@ public partial class HomeViewModel : BaseViewModel, INotifyPropertyChanged
     {
         _applicationDbContext = applicationDbContext;
 
-        Title = "Home";
         SelectedDate = DateTime.Today;
     }
 
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    [RelayCommand]
+    async Task GoToWorkout(Workout workout)
+    {
+        if (workout == null)
+            return;
+
+        var w = _applicationDbContext.Workouts
+            .Where(x => x.Id == workout.Id)
+            .Include(w => w.Workouts2Excersices)
+            .FirstOrDefault();
+
+        await Shell.Current.GoToAsync(nameof(WorkoutPage), true, new Dictionary<string, object>
+        {
+            {"Workout", w }
+        });
     }
 }

@@ -16,7 +16,7 @@ public partial class CustomExercisesViewModel : BaseViewModel, INotifyPropertyCh
     public ObservableCollection<Excercise> Excercises { get; set; }
 
     [ObservableProperty]
-    bool isRefreshing;
+    private bool isRefreshing;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
