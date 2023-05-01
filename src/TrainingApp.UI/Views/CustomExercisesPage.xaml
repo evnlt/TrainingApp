@@ -4,15 +4,10 @@
              x:Class="TrainingApp.UI.Views.CustomExercisesPage"
              xmlns:model="clr-namespace:TrainingApp.Application.Entities.Workout;assembly=TrainingApp.Application"
              xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
-             x:DataType="viewmodel:BuiltInExercisesViewModel"
+             x:DataType="viewmodel:CustomExercisesViewModel"
              Title="Excercises">
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Custom exercises content"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
+    <Grid>
         <ContentView>
             <CollectionView
                     ItemsSource="{Binding Excercises}"
@@ -27,5 +22,19 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ContentView>
-    </VerticalStackLayout>
+
+        <Button
+            Padding="10"
+            Margin="20"
+            HorizontalOptions="End"
+		    VerticalOptions="End"
+            Command="{Binding AddCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Style="{StaticResource ButtonOutline}"
+            Text="Add" />
+
+
+    </Grid>
+
+
 </ContentPage>

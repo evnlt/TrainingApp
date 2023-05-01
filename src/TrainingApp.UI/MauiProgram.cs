@@ -28,11 +28,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<MainPage>();
 
-        builder.Services.AddSingleton<BuiltInExercisesViewModel>();
-        builder.Services.AddSingleton<BuiltInExercisesPage>();
+        builder.Services.AddTransient<BuiltInExercisesViewModel>();
+        builder.Services.AddTransient<BuiltInExercisesPage>();
 
-        builder.Services.AddSingleton<CustomExercisesViewModel>();
-        builder.Services.AddSingleton<CustomExercisesPage>();
+        builder.Services.AddTransient<CustomExercisesViewModel>();
+        builder.Services.AddTransient<CustomExercisesPage>();
+
+        builder.Services.AddTransient<AddCustomExcerciseViewModel>();
+        builder.Services.AddTransient<AddCustomExcercisePage>();
 
         return builder.Build();
     }

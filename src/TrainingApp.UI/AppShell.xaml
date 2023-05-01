@@ -97,10 +97,10 @@
     </FlyoutItem>
 
 
-    <FlyoutItem Title="Excercises">
-        <Tab Title="Excercises custom">
-            <ShellContent Title="Built-in" ContentTemplate="{DataTemplate local:BuiltInExercisesPage}"/>
-            <ShellContent Title="Custom" ContentTemplate="{DataTemplate local:CustomExercisesPage}" />
+    <FlyoutItem Title="Excercises" Route="ExcersicesList">
+        <Tab Title="ExcercisesTab" Route="Kinds">
+            <ShellContent Title="Built-in" Route="Built-in" ContentTemplate="{DataTemplate local:BuiltInExercisesPage}"/>
+            <ShellContent Title="Custom" Route="Custom" ContentTemplate="{DataTemplate local:CustomExercisesPage}" />
         </Tab>
     </FlyoutItem>
 

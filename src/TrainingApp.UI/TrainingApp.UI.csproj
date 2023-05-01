@@ -51,6 +51,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -58,12 +59,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\AddCustomExcercisePage.xaml.cs">
+	    <DependentUpon>AddCustomExcercisePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\BuiltInExercisesPage.xaml.cs">
 	    <DependentUpon>BuiltInExercisesPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AddCustomExcercisePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\BuiltInExercisesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
