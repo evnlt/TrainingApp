@@ -10,7 +10,7 @@ public class Set
 
     public int Order { get; set; }
 
-    public float Weight { get; set; }
+    public int Measure { get; set; }
 
     public int Reps { get; set; }
 

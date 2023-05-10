@@ -1,6 +1,7 @@
 ﻿using MvvmHelpers.Commands;
 using System.Xml.Linq;
 using TrainingApp.Application.Entities;
+using TrainingApp.Application.Enums;
 using TrainingApp.Infrastructure;
 using TrainingApp.UI.Views;
 
@@ -13,6 +14,10 @@ public class AddCustomExcerciseViewModel : BaseViewModel
     private string _name;
 
     public string Name { get => _name; set => SetProperty(ref _name, value); }
+
+    private string _selectedType;
+
+    public string SelectedType { get => _selectedType; set => SetProperty(ref _selectedType, value); }
 
     public AsyncCommand SaveCommand { get; }
 
@@ -35,8 +40,9 @@ public class AddCustomExcerciseViewModel : BaseViewModel
             .Add(new Excercise
             {
                 Name = _name,
-                IsBuiltIn = false
-            });
+                IsBuiltIn = false,
+                ExcersiceType = _selectedType == "Weight" ? ExcersiceType.Weight : ExcersiceType.Time
+            }) ;
 
         await _applicationDbContext.SaveChangesAsync();
 

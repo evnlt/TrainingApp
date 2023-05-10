@@ -103,8 +103,4 @@
             <ShellContent Title="Custom" Route="Custom" ContentTemplate="{DataTemplate local:CustomExercisesPage}" />
         </Tab>
     </FlyoutItem>
-
-    <FlyoutItem Title="Workout plans">
-        <ShellContent ContentTemplate="{DataTemplate local:PlansPage}" Route="PlansPage" />
-    </FlyoutItem>
 </Shell>

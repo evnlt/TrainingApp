@@ -4,9 +4,21 @@ namespace TrainingApp.UI.Views;
 
 public partial class AddCustomExcercisePage : ContentPage
 {
-	public AddCustomExcercisePage(AddCustomExcerciseViewModel viewModel)
+    private AddCustomExcerciseViewModel vm;
+    public AddCustomExcercisePage(AddCustomExcerciseViewModel viewModel)
 	{
-		InitializeComponent();
+        vm = viewModel;
+		
+        InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        var val = (sender as RadioButton)?.Value as string;
+        if (string.IsNullOrWhiteSpace(val))
+            return;
+
+        vm.SelectedType = val;
+    }
 }

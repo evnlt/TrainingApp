@@ -1,4 +1,6 @@
-﻿namespace TrainingApp.Application.Entities;
+﻿using TrainingApp.Application.Enums;
+
+namespace TrainingApp.Application.Entities;
 
 public class Excercise
 {
@@ -6,7 +8,7 @@ public class Excercise
 
     public string Name { get; set; } = default!;
 
-    public string? Description { get; set; } 
+    public ExcersiceType ExcersiceType { get; set; }
 
     public bool IsBuiltIn { get; set; }
 

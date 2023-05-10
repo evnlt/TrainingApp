@@ -9,7 +9,17 @@
 
     <VerticalStackLayout>
         <StackLayout Padding="20">
-            
+
+            <HorizontalStackLayout
+                RadioButtonGroup.SelectedValue="{Binding SelectedType}">
+                <RadioButton Content="Weight"
+                 Value="Weight" IsChecked="True"
+                 CheckedChanged="RadioButton_CheckedChanged"/>
+                <RadioButton Content="Time"
+                 Value="Time"
+                 CheckedChanged="RadioButton_CheckedChanged"/>
+            </HorizontalStackLayout>
+
             <Label Text="Name:"
                    Style="{StaticResource LabelMedium}"/>
             <Entry BackgroundColor="Grey" Text="{Binding Name, Mode=TwoWay}" />

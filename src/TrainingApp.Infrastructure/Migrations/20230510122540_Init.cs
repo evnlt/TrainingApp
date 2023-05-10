@@ -19,7 +19,7 @@ namespace TrainingApp.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    ExcersiceType = table.Column<int>(type: "INTEGER", nullable: false),
                     IsBuiltIn = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -131,7 +131,7 @@ namespace TrainingApp.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     WorkoutExcerciseId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Order = table.Column<int>(type: "INTEGER", nullable: false),
-                    Weight = table.Column<float>(type: "REAL", nullable: false),
+                    Measure = table.Column<int>(type: "INTEGER", nullable: false),
                     Reps = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -147,12 +147,12 @@ namespace TrainingApp.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Excercises",
-                columns: new[] { "Id", "Description", "IsBuiltIn", "Name" },
+                columns: new[] { "Id", "ExcersiceType", "IsBuiltIn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("509d1054-0f39-4936-aa26-fbc0f108729b"), null, true, "Ab curl" },
-                    { new Guid("71e02e1c-6739-4ad4-b11d-8aad12e8f526"), null, false, "Custom 1" },
-                    { new Guid("c6cb5002-7f5f-47a2-84c7-761433b32d4b"), null, true, "Pullups" }
+                    { new Guid("84dfc342-7bd3-41b7-9320-51fa4dd4c355"), 0, true, "Pullups" },
+                    { new Guid("a23d31a7-d837-493a-b2f0-c5d3002146a8"), 0, true, "Ab curl" },
+                    { new Guid("a31a4391-c4b7-4295-805c-62870b8810cd"), 1, false, "Custom 1" }
                 });
 
             migrationBuilder.InsertData(
@@ -160,8 +160,8 @@ namespace TrainingApp.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("6622a6ab-dda3-4524-9fe3-0571d1146ca3"), "Abs" },
-                    { new Guid("9b3ab829-5f1b-4335-9c93-37f9ac9ca4e0"), "Pull" }
+                    { new Guid("855c75b4-16fb-483c-a571-eb2e68ba5d2e"), "Abs" },
+                    { new Guid("9eaf004d-b454-468a-90dd-89dcf8235f0a"), "Pull" }
                 });
 
             migrationBuilder.InsertData(
@@ -169,9 +169,9 @@ namespace TrainingApp.Infrastructure.Migrations
                 columns: new[] { "Id", "Date", "IsDone", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("1faca5b3-a8c5-4a4f-9e79-6f619899b932"), new DateTime(2023, 5, 9, 0, 0, 0, 0, DateTimeKind.Local), true, "Abs" },
-                    { new Guid("a2f98b18-da6f-43a7-a37d-08d9397d6f5f"), new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Local), false, "Abs" },
-                    { new Guid("c7c4e5ad-8883-4458-a983-3c05fb9e58e7"), new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Local), false, "Pull" }
+                    { new Guid("103947b5-4ef7-44de-a700-8edfbd848d1b"), new DateTime(2023, 5, 9, 0, 0, 0, 0, DateTimeKind.Local), true, "Abs" },
+                    { new Guid("47053966-abd2-462a-8100-0d8cc2273baf"), new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Local), false, "Abs" },
+                    { new Guid("c3806593-da34-4d26-903e-562e6f15a6c0"), new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Local), false, "Pull" }
                 });
 
             migrationBuilder.CreateIndex(

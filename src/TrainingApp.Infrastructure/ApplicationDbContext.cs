@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TrainingApp.Application.Common.Interfaces;
 using TrainingApp.Application.Entities;
+using TrainingApp.Application.Enums;
 using TrainingApp.Infrastructure.Configurations;
 
 namespace TrainingApp.Infrastructure;
@@ -69,16 +70,19 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         {
             Name = "Pullups",
             IsBuiltIn = true,
+            ExcersiceType = ExcersiceType.Weight
         },
         new Excercise
         {
             Name = "Ab curl",
             IsBuiltIn = true,
+            ExcersiceType = ExcersiceType.Weight
         },
         new Excercise
         {
             Name = "Custom 1",
             IsBuiltIn = false,
+            ExcersiceType = ExcersiceType.Time
         });
     }
 
@@ -87,7 +91,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     /// </summary>
     public ApplicationDbContext()
     {
-        File = Path.Combine("./", "UsedByMigratorOnly4.db3");
+        File = Path.Combine("./", "MigratorDb006.db3");
         Initialize();
     }
 
