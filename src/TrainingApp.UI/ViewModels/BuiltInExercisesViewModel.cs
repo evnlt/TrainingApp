@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using TrainingApp.Application.Entities.Workout;
+using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
 
 namespace TrainingApp.UI.ViewModels;

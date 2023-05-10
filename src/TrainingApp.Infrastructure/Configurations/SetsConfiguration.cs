@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TrainingApp.Application.Entities.Workout;
+using TrainingApp.Application.Entities;
 
 namespace TrainingApp.Infrastructure.Configurations;
 
@@ -12,6 +12,6 @@ public class SetsConfiguration : IEntityTypeConfiguration<Set>
 
         builder.HasKey(x => x.Id);
 
-        builder.HasOne(x => x.Workouts2Excercises).WithMany(x => x.Sets).HasForeignKey(x => x.WorkoutExcerciseId);
+        builder.HasOne(x => x.WorkoutExcercises).WithMany(x => x.Sets).HasForeignKey(x => x.WorkoutExcerciseId);
     }
 }

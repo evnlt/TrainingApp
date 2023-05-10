@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TrainingApp.Application.Entities.Workout;
+using TrainingApp.Application.Entities;
 
 namespace TrainingApp.Infrastructure.Configurations;
 
@@ -13,8 +13,5 @@ internal class WorkoutsConfiguration : IEntityTypeConfiguration<Workout>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Name).HasMaxLength(64).IsRequired();
-        builder.Property(x => x.Notes).HasMaxLength(1000).IsRequired(false);
-
-        builder.HasOne(x => x.WorkoutTemplate).WithMany(x => x.Workouts).HasForeignKey(x => x.WorkoutTemplateId);
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace TrainingApp.Application.Entities.Workout;
+﻿namespace TrainingApp.Application.Entities;
 
-public class Workouts2Excersices
+public class WorkoutExcersices
 {
     public Guid Id { get; set; } = Guid.NewGuid();
 

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using TrainingApp.Application.Entities.Workout;
+using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
 using TrainingApp.UI.Views;
 
@@ -58,7 +58,7 @@ public partial class HomeViewModel : BaseViewModel, INotifyPropertyChanged
 
         var w = _applicationDbContext.Workouts
             .Where(x => x.Id == workout.Id)
-            .Include(w => w.Workouts2Excersices)
+            .Include(w => w.WorkoutExcersices)
             .FirstOrDefault();
 
         await Shell.Current.GoToAsync(nameof(WorkoutPage), true, new Dictionary<string, object>

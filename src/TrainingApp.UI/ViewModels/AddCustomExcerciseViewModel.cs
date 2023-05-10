@@ -1,6 +1,6 @@
 ﻿using MvvmHelpers.Commands;
 using System.Xml.Linq;
-using TrainingApp.Application.Entities.Workout;
+using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
 using TrainingApp.UI.Views;
 
@@ -35,7 +35,6 @@ public class AddCustomExcerciseViewModel : BaseViewModel
             .Add(new Excercise
             {
                 Name = _name,
-                InUse = true,
                 IsBuiltIn = false
             });
 

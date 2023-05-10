@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MvvmHelpers.Commands;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using TrainingApp.Application.Entities.Workout;
+using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
 using TrainingApp.UI.Views;
 

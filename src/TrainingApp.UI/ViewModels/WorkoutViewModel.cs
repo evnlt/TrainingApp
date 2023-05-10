@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using TrainingApp.Application.Entities.Workout;
+using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
 
 namespace TrainingApp.UI.ViewModels;
@@ -25,7 +25,7 @@ public partial class WorkoutViewModel : BaseViewModel
 
     public void Load()
     {
-        var excercises = Workout.Workouts2Excersices.Select(x => x.Excercise);
+        var excercises = Workout.WorkoutExcersices.Select(x => x.Excercise);
         Excercises = new ObservableCollection<Excercise>(excercises);
         OnPropertyChanged(nameof(Excercises));
     }

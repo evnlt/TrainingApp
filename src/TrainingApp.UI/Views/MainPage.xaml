@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
-    xmlns:model="clr-namespace:TrainingApp.Application.Entities.Workout;assembly=TrainingApp.Application"
+    xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
     x:Class="TrainingApp.UI.Views.MainPage"
     x:DataType="viewmodel:HomeViewModel"
     Title="{Binding Title}">

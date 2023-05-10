@@ -1,15 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
+using TrainingApp.Application.Common.Interfaces;
 using TrainingApp.Application.Entities;
-using TrainingApp.Application.Entities.Workout;
 using TrainingApp.Infrastructure.Configurations;
 
 namespace TrainingApp.Infrastructure;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
-
-    public DbSet<Metric> Metrics { get; set; }
 
     public DbSet<Excercise> Excercises { get; set; }
 
@@ -17,45 +14,54 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Workout> Workouts { get; set; }
 
-    public DbSet<Workouts2Excersices> Workouts2Excersices { get; set; }
+    public DbSet<WorkoutExcersices> WorkoutExcersices { get; set; }
 
-    public DbSet<WorkoutTemplate> WorkoutTemplates { get; set; }
+    public DbSet<Routine> Routines { get; set; }
 
-    public DbSet<WorkoutTemplates2Excercises> WorkoutTemplates2Excercises { get; set; }
+    public DbSet<RoutineExcersices> RoutineExcersices { get; set; }
+
+    public DbSet<RoutineDates> RoutineDates { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
         builder.ApplyConfiguration(new ExcercisesConfiguration());
-        builder.ApplyConfiguration(new MetricsConfiguration());
         builder.ApplyConfiguration(new SetsConfiguration());
-        builder.ApplyConfiguration(new Workouts2ExcersicesConfiguration());
         builder.ApplyConfiguration(new WorkoutsConfiguration());
-        builder.ApplyConfiguration(new WorkoutTemplates2ExcercisesConfiguration());
-        builder.ApplyConfiguration(new WorkoutTemplatesConfiguration());
+        builder.ApplyConfiguration(new WorkoutExcersicesConfiguration());
+        builder.ApplyConfiguration(new RoutinesConfiguration());
+        builder.ApplyConfiguration(new RoutineExcersicesConfiguration());
+        builder.ApplyConfiguration(new RoutineDatesConfiguration());
 
         builder.Entity<Workout>().HasData(
         new Workout
         {
             Name = "Abs",
-            Notes = "This is a note",
             Date = DateTime.Today,
             IsDone = false
         },
         new Workout
         {
             Name = "Pull",
-            Notes = "This is a note",
             Date = DateTime.Today,
             IsDone = false
         },
         new Workout
         {
             Name = "Abs",
-            Notes = "This is another note",
             Date = DateTime.Today.AddDays(-1),
             IsDone = true
+        });
+
+        builder.Entity<Routine>().HasData(
+        new Routine
+        {
+            Name = "Abs",
+        },
+        new Routine
+        {
+            Name = "Pull",
         });
 
         builder.Entity<Excercise>().HasData(
@@ -63,19 +69,16 @@ public class ApplicationDbContext : DbContext
         {
             Name = "Pullups",
             IsBuiltIn = true,
-            InUse = true
         },
         new Excercise
         {
             Name = "Ab curl",
             IsBuiltIn = true,
-            InUse = true
         },
         new Excercise
         {
             Name = "Custom 1",
             IsBuiltIn = false,
-            InUse = true
         });
     }
 
@@ -84,7 +87,7 @@ public class ApplicationDbContext : DbContext
     /// </summary>
     public ApplicationDbContext()
     {
-        File = Path.Combine("./", "UsedByMigratorOnly3.db3");
+        File = Path.Combine("./", "UsedByMigratorOnly4.db3");
         Initialize();
     }
 

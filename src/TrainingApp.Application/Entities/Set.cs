@@ -1,4 +1,4 @@
-﻿namespace TrainingApp.Application.Entities.Workout;
+﻿namespace TrainingApp.Application.Entities;
 
 public class Set
 {
@@ -6,7 +6,7 @@ public class Set
 
     public Guid WorkoutExcerciseId { get; set; }
 
-    public Workouts2Excersices Workouts2Excercises { get; set; } = default!;
+    public WorkoutExcersices WorkoutExcercises { get; set; } = default!;
 
     public int Order { get; set; }
 
