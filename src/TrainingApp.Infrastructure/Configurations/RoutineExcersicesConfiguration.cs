@@ -10,9 +10,13 @@ internal class RoutineExcersicesConfiguration : IEntityTypeConfiguration<Routine
     {
         builder.ToTable("RoutineExcercises");
 
-        builder.HasKey(x => x.Id);
+        //builder.HasKey(x => new { x.RoutineId, x.ExcerciseId });
+        builder.HasKey(nameof(RoutineExcersices.RoutineId), nameof(RoutineExcersices.ExcerciseId));
 
         builder.HasOne(x => x.Routine).WithMany(x => x.RoutineExcersices).HasForeignKey(x => x.RoutineId);
         builder.HasOne(x => x.Excercise).WithMany(x => x.RoutineExcersices).HasForeignKey(x => x.ExcerciseId);
+
+        builder.Property(x => x.RoutineId).ValueGeneratedNever();
+        builder.Property(x => x.ExcerciseId).ValueGeneratedNever();
     }
 }

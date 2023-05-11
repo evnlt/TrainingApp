@@ -8,5 +8,6 @@ public class Routine
 
     public ICollection<RoutineDates> Dates { get; set; } = default!;
 
-    public ICollection<RoutineExcersices> RoutineExcersices { get; set; } = default!;
+    public ICollection<RoutineExcersices> RoutineExcersices { get; set; } = new List<RoutineExcersices>();
+
 }

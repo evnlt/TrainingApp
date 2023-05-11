@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingApp.UI.Views.EditRoutinePage"
+             xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
+             xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
+             x:DataType="viewmodel:EditRoutineViewModel"
+             Title="">
+    <VerticalStackLayout>
+        <Label Text="Name:"
+                   Style="{StaticResource LabelMedium}"/>
+
+        <Entry BackgroundColor="Grey" Text="{Binding Routine.Name, Mode=TwoWay}" />
+
+        <HorizontalStackLayout>
+            <Label Text="Excercises"
+                   Style="{StaticResource LabelMedium}"/>
+
+        <Button
+            Padding="10"
+            Margin="20"
+            Command="{Binding AddCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Style="{StaticResource ButtonOutline}"
+            Text="Add" />
+        </HorizontalStackLayout>
+        
+
+        <ContentView>
+            <CollectionView
+                    ItemsSource="{Binding Excercises}"
+                    SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Excercise">
+                        <Grid Padding="10">
+                            <Label Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ContentView>
+    </VerticalStackLayout>
+</ContentPage>

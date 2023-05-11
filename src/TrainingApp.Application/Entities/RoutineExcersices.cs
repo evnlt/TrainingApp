@@ -1,8 +1,11 @@
-﻿namespace TrainingApp.Application.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TrainingApp.Application.Entities;
 
 public class RoutineExcersices
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    //public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid RoutineId { get; set; }
 

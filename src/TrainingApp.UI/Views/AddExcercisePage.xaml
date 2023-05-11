@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingApp.UI.Views.AddExcercisePage"
+             xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
+             xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
+             x:DataType="viewmodel:AddExcerciseViewModel"
+             Title="">
+
+
+    <VerticalStackLayout>
+        <StackLayout Padding="20">
+
+            <HorizontalStackLayout
+                RadioButtonGroup.SelectedValue="{Binding SelectedType}">
+                <RadioButton Content="Built-in"
+                 Value="BuiltIn" IsChecked="True"
+                 CheckedChanged="RadioButton_CheckedChanged"/>
+                <RadioButton Content="Custom"
+                 Value="Custom"
+                 CheckedChanged="RadioButton_CheckedChanged"/>
+            </HorizontalStackLayout>
+
+            <CollectionView
+                    ItemsSource="{Binding Excercises}"
+                    SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Excercise">
+                        <Grid Padding="10">
+                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AddExcerciseViewModel}}, Path=AddExcerciseCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Label Text="{Binding Name}" />
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </VerticalStackLayout>
+
+</ContentPage>
