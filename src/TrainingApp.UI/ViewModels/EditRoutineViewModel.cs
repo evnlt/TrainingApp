@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using MvvmHelpers.Commands;
 using System.Collections.ObjectModel;
@@ -28,24 +29,6 @@ public partial class EditRoutineViewModel : BaseViewModel
 
         AddCommand = new AsyncCommand(Add);
         RefreshCommand = new AsyncCommand(Refresh);
-
-        /*try
-        {
-            var r = _applicationDbContext.Routines
-                        .Where(x => x.Id == routine.Id)
-                        .Include(x => x.RoutineExcersices)
-                        .FirstOrDefault();
-
-            var excercises = r.RoutineExcersices
-                .OrderBy(x => x.Order)
-                .Select(x => x.Excercise)
-                .ToList();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-        }*/
-
     }
 
     public void Load()
@@ -58,6 +41,26 @@ public partial class EditRoutineViewModel : BaseViewModel
 
         Excercises = new ObservableCollection<Excercise>(excercises);
         OnPropertyChanged(nameof(Excercises));
+    }
+
+    [RelayCommand]
+    private async Task DeleteExcercise(Excercise excercise)
+    {
+        if (excercise == null)
+            return;
+
+        var r = _applicationDbContext.Routines
+            .Where(x => x.Id == Routine.Id)
+            .Include(x => x.RoutineExcersices)
+            .FirstOrDefault();
+
+        var ex = r.RoutineExcersices.Where(x => x.Excercise == excercise).FirstOrDefault();
+
+        _applicationDbContext.RoutineExcersices.Remove(ex); 
+        await _applicationDbContext.SaveChangesAsync();
+
+        Excercises.Remove(excercise);
+        await Refresh();
     }
 
     private async Task Add()
