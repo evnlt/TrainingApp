@@ -5,7 +5,8 @@
              xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
              xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
              x:DataType="viewmodel:EditRoutineViewModel"
-             Title="">
+             Title=""
+             x:Name="EditRoutineContainer">
     <VerticalStackLayout>
         <Label Text="Name:"
                    Style="{StaticResource LabelMedium}"/>
@@ -42,7 +43,22 @@
                                 
                                 <!--<Button Text="Delete" Command="{Binding Path=DeleteExcerciseCommand, Source={x:Reference EditRoutineViewModel}}" CommandParameter="{Binding .}" />-->
                             </HorizontalStackLayout>
+                            <Grid.GestureRecognizers>
+                            <DragGestureRecognizer
+                                        CanDrag="True"
+                                        DragStartingCommand="{Binding BindingContext.ItemDraggedCommand, Source={x:Reference EditRoutineContainer}}"
+                                        DragStartingCommandParameter="{Binding}" />
+                            <DropGestureRecognizer
+                                        AllowDrop="True"
+                                        DragLeaveCommand="{Binding BindingContext.ItemDragLeaveCommand, Source={x:Reference EditRoutineContainer}}"
+                                        DragLeaveCommandParameter="{Binding}"
+                                        DragOverCommand="{Binding BindingContext.ItemDraggedOverCommand, Source={x:Reference EditRoutineContainer}}"
+                                        DragOverCommandParameter="{Binding}"
+                                        DropCommand="{Binding BindingContext.ItemDroppedCommand, Source={x:Reference EditRoutineContainer}}"
+                                        DropCommandParameter="{Binding}" />
+                        </Grid.GestureRecognizers>
                         </Grid>
+                        
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
