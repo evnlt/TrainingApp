@@ -21,7 +21,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<RoutineExcersices> RoutineExcersices { get; set; }
 
-    public DbSet<RoutineDates> RoutineDates { get; set; }
+    //public DbSet<RoutineDates> RoutineDates { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -33,7 +33,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         builder.ApplyConfiguration(new WorkoutExcersicesConfiguration());
         builder.ApplyConfiguration(new RoutinesConfiguration());
         builder.ApplyConfiguration(new RoutineExcersicesConfiguration());
-        builder.ApplyConfiguration(new RoutineDatesConfiguration());
+        //builder.ApplyConfiguration(new RoutineDatesConfiguration());
 
         builder.Entity<Workout>().HasData(
         new Workout
@@ -59,11 +59,13 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         new Routine
         {
             Name = "Abs",
+            DateTimes = new List<DateTime>()
         },
         new Routine
         {
             Name = "Pull",
-        });
+            DateTimes = new List<DateTime>()
+        }) ;
 
         builder.Entity<Excercise>().HasData(
         new Excercise
@@ -91,7 +93,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     /// </summary>
     public ApplicationDbContext()
     {
-        File = Path.Combine("./", "MigratorDb006.db3");
+        File = Path.Combine("./", "MigratorDb007.db3");
         Initialize();
     }
 

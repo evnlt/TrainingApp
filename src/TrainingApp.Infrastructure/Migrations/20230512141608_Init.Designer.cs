@@ -11,8 +11,8 @@ using TrainingApp.Infrastructure;
 namespace TrainingApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230511131950_Test4")]
-    partial class Test4
+    [Migration("20230512141608_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,21 +44,21 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("23d44a33-f522-4a64-8c4e-f6bb877d55a4"),
+                            Id = new Guid("89ec10fa-1e7b-43f2-9edd-a8e1f58c52b8"),
                             ExcersiceType = 0,
                             IsBuiltIn = true,
                             Name = "Pullups"
                         },
                         new
                         {
-                            Id = new Guid("3baf6f55-69e0-4041-8b66-1150af31e7ce"),
+                            Id = new Guid("d1755173-1b1f-4ba5-adb5-5d285b436fa3"),
                             ExcersiceType = 0,
                             IsBuiltIn = true,
                             Name = "Ab curl"
                         },
                         new
                         {
-                            Id = new Guid("694ef92f-b5d3-4b14-873f-64bbe449a62c"),
+                            Id = new Guid("b8188c25-ae5b-44a9-ba04-1ac4e17bed68"),
                             ExcersiceType = 1,
                             IsBuiltIn = false,
                             Name = "Custom 1"
@@ -83,12 +83,12 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("719d06cc-30cc-4c40-954d-e6422bbcd6f7"),
+                            Id = new Guid("ce63b05a-ea74-43d2-b692-b6f1eb86c54a"),
                             Name = "Abs"
                         },
                         new
                         {
-                            Id = new Guid("0f17e922-6f62-4941-b78b-c40eddb502f2"),
+                            Id = new Guid("437294dd-f094-4b16-b812-21ea08edd23d"),
                             Name = "Pull"
                         });
                 });
@@ -118,9 +118,6 @@ namespace TrainingApp.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ExcerciseId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Order")
@@ -182,22 +179,22 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("06756c6f-9b19-41ee-a361-71d90bc0514e"),
-                            Date = new DateTime(2023, 5, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("583e7329-ff8a-4cac-8d53-dfdd0b90940f"),
+                            Date = new DateTime(2023, 5, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = false,
                             Name = "Abs"
                         },
                         new
                         {
-                            Id = new Guid("735c2138-66de-4e51-a94e-8d671271d18b"),
-                            Date = new DateTime(2023, 5, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("2900f8c7-054c-4c53-9aff-b8dd25e7dee7"),
+                            Date = new DateTime(2023, 5, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = false,
                             Name = "Pull"
                         },
                         new
                         {
-                            Id = new Guid("3de03311-56e7-4042-aa02-b73a13f1951a"),
-                            Date = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("b275bb22-41f1-4b2e-b1f2-b4706646d30a"),
+                            Date = new DateTime(2023, 5, 11, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = true,
                             Name = "Abs"
                         });

@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using TrainingApp.UI.ViewModels;
 
 namespace TrainingApp.UI.Views;
@@ -6,7 +7,7 @@ public partial class EditRoutinePage : ContentPage
 {
 	private EditRoutineViewModel vm;
 
-	public EditRoutinePage(EditRoutineViewModel viewModel)
+    public EditRoutinePage(EditRoutineViewModel viewModel)
 	{
 		vm = viewModel;
 
@@ -20,5 +21,10 @@ public partial class EditRoutinePage : ContentPage
 
         await vm.RefreshCommand.ExecuteAsync();
 		vm.Load();
+    }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        this.ShowPopup(new PopupCalendarPage(vm.Routine));
     }
 }

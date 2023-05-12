@@ -6,12 +6,36 @@
              xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
              x:DataType="viewmodel:EditRoutineViewModel"
              Title=""
-             x:Name="EditRoutineContainer">
+             x:Name="EditRoutineContainer"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Calendar;assembly=Syncfusion.Maui.Calendar">
+
     <VerticalStackLayout>
         <Label Text="Name:"
                    Style="{StaticResource LabelMedium}"/>
 
         <Entry BackgroundColor="Grey" Text="{Binding Routine.Name, Mode=TwoWay}" />
+
+        <HorizontalStackLayout>
+            <Label Text="Dates"
+                   Style="{StaticResource LabelMedium}"/>
+
+            <!--<Button
+            Padding="10"
+            Margin="20"
+            Command="{Binding AddCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Style="{StaticResource ButtonOutline}"
+            Text="Add" />-->
+            
+            <!--<c1:C1Calendar x:Name="calendar" SelectionMode="Multiple"
+                             SelectionChanged="calendar_SelectionChanged"/>-->
+
+            <!--<sf:SfCalendar x:Name="calendar" SelectionMode="Multiple"
+                             SelectionChanged="calendar_SelectionChanged" />-->
+
+            <Button Text="Pick dates..." Clicked="Button_Clicked"></Button>
+
+        </HorizontalStackLayout>
 
         <HorizontalStackLayout>
             <Label Text="Excercises"
@@ -40,15 +64,15 @@
                                 <Button Text="X" 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EditRoutineViewModel}}, Path=DeleteExcerciseCommand}"
                                         CommandParameter="{Binding .}"></Button>
-                                
+
                                 <!--<Button Text="Delete" Command="{Binding Path=DeleteExcerciseCommand, Source={x:Reference EditRoutineViewModel}}" CommandParameter="{Binding .}" />-->
                             </HorizontalStackLayout>
                             <Grid.GestureRecognizers>
-                            <DragGestureRecognizer
+                                <DragGestureRecognizer
                                         CanDrag="True"
                                         DragStartingCommand="{Binding BindingContext.ItemDraggedCommand, Source={x:Reference EditRoutineContainer}}"
                                         DragStartingCommandParameter="{Binding}" />
-                            <DropGestureRecognizer
+                                <DropGestureRecognizer
                                         AllowDrop="True"
                                         DragLeaveCommand="{Binding BindingContext.ItemDragLeaveCommand, Source={x:Reference EditRoutineContainer}}"
                                         DragLeaveCommandParameter="{Binding}"
@@ -56,9 +80,9 @@
                                         DragOverCommandParameter="{Binding}"
                                         DropCommand="{Binding BindingContext.ItemDroppedCommand, Source={x:Reference EditRoutineContainer}}"
                                         DropCommandParameter="{Binding}" />
-                        </Grid.GestureRecognizers>
+                            </Grid.GestureRecognizers>
                         </Grid>
-                        
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

@@ -2,16 +2,21 @@
 using TrainingApp.Infrastructure;
 using TrainingApp.UI.ViewModels;
 using TrainingApp.UI.Views;
+using C1.Maui;
+using Syncfusion.Maui.Core.Hosting;
+using CommunityToolkit.Maui;
 
 namespace TrainingApp.UI;
 
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
-	{
+    {
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .ConfigureSyncfusionCore()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -22,7 +27,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient((services) =>
         {
-            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite006.db3"));
+            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite007.db3"));
         });
 
         builder.Services.AddSingleton<HomeViewModel>();

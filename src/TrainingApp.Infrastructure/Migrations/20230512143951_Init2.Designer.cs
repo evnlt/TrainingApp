@@ -11,8 +11,8 @@ using TrainingApp.Infrastructure;
 namespace TrainingApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230511125407_Test2")]
-    partial class Test2
+    [Migration("20230512143951_Init2")]
+    partial class Init2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,21 +44,21 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bcf12467-6f76-4eb3-a84a-4087fb8eefe1"),
+                            Id = new Guid("176a0e0b-38c7-463d-a59d-17ee04ff0f3b"),
                             ExcersiceType = 0,
                             IsBuiltIn = true,
                             Name = "Pullups"
                         },
                         new
                         {
-                            Id = new Guid("5be8888e-bc09-4eec-8041-4865c0200720"),
+                            Id = new Guid("858bdf43-cd98-4815-be2f-3be235aa0490"),
                             ExcersiceType = 0,
                             IsBuiltIn = true,
                             Name = "Ab curl"
                         },
                         new
                         {
-                            Id = new Guid("d6e512af-361f-4453-8f2b-4f90ae46ac93"),
+                            Id = new Guid("92c58b1b-ad38-47c8-b5d3-671ed5f0151f"),
                             ExcersiceType = 1,
                             IsBuiltIn = false,
                             Name = "Custom 1"
@@ -69,6 +69,10 @@ namespace TrainingApp.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DateTimes")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -83,39 +87,21 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f4180933-e21f-4a82-9017-d11a4513322b"),
+                            Id = new Guid("62204757-cf51-43bf-afe8-2e76856803e9"),
+                            DateTimes = "",
                             Name = "Abs"
                         },
                         new
                         {
-                            Id = new Guid("f643d99b-7767-4411-b6ea-a6aae431d651"),
+                            Id = new Guid("2001029b-a621-4966-9424-28ee2f972a56"),
+                            DateTimes = "",
                             Name = "Pull"
                         });
                 });
 
-            modelBuilder.Entity("TrainingApp.Application.Entities.RoutineDates", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("RoutineId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoutineId");
-
-                    b.ToTable("RoutineDates", (string)null);
-                });
-
             modelBuilder.Entity("TrainingApp.Application.Entities.RoutineExcersices", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("RoutineId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ExcerciseId")
@@ -124,14 +110,9 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("RoutineId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
+                    b.HasKey("RoutineId", "ExcerciseId");
 
                     b.HasIndex("ExcerciseId");
-
-                    b.HasIndex("RoutineId");
 
                     b.ToTable("RoutineExcercises", (string)null);
                 });
@@ -185,22 +166,22 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8169ced8-2947-4cd7-8ca0-eb3b604fc532"),
-                            Date = new DateTime(2023, 5, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("812ecad2-38b5-4f74-a277-96a9832fbbc9"),
+                            Date = new DateTime(2023, 5, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = false,
                             Name = "Abs"
                         },
                         new
                         {
-                            Id = new Guid("040d9a6b-62ab-4606-b8cd-321dae0462c5"),
-                            Date = new DateTime(2023, 5, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("7b9f13eb-b1e0-437a-abb2-7a54a9a4111d"),
+                            Date = new DateTime(2023, 5, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = false,
                             Name = "Pull"
                         },
                         new
                         {
-                            Id = new Guid("9bc975ce-5e82-47bf-9943-dfac237d4e99"),
-                            Date = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("d77e11a1-e19c-48c9-944c-69be3c7a05e3"),
+                            Date = new DateTime(2023, 5, 11, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = true,
                             Name = "Abs"
                         });
@@ -228,17 +209,6 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasIndex("WorkoutId");
 
                     b.ToTable("WorkoutExcercises", (string)null);
-                });
-
-            modelBuilder.Entity("TrainingApp.Application.Entities.RoutineDates", b =>
-                {
-                    b.HasOne("TrainingApp.Application.Entities.Routine", "Routine")
-                        .WithMany("Dates")
-                        .HasForeignKey("RoutineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Routine");
                 });
 
             modelBuilder.Entity("TrainingApp.Application.Entities.RoutineExcersices", b =>
@@ -299,8 +269,6 @@ namespace TrainingApp.Infrastructure.Migrations
 
             modelBuilder.Entity("TrainingApp.Application.Entities.Routine", b =>
                 {
-                    b.Navigation("Dates");
-
                     b.Navigation("RoutineExcersices");
                 });
 

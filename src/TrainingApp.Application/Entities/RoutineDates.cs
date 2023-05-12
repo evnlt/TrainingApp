@@ -2,7 +2,7 @@
 
 public class RoutineDates
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid RoutineId { get; set; }
 

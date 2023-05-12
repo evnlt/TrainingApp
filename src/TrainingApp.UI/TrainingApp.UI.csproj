@@ -49,9 +49,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="C1.Maui.Calendar" Version="6.0.20231.519" />
+		<PackageReference Include="C1.Maui.Core" Version="6.0.20231.519" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+		<PackageReference Include="Syncfusion.Maui.Calendar" Version="21.2.4" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,6 +88,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\EditRoutinePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PopupCalendarPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RoutinesPage.xaml">
