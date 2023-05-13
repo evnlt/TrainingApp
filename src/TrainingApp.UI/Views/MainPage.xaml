@@ -51,6 +51,29 @@
             </CollectionView>
         </ContentView>
 
+        <ContentView>
+            <CollectionView
+                    ItemsSource="{Binding Routines}"
+                    SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Routine">
+                        <Grid Padding="10">
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Name}" />
+
+                                <Button
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=StartRoutineCommand}"
+                                            CommandParameter="{Binding .}"
+                                Text=">"
+                                VerticalOptions="End"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ContentView>
+
     </VerticalStackLayout>
 
 

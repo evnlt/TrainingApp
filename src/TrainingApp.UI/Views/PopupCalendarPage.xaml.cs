@@ -1,12 +1,8 @@
 using CommunityToolkit.Maui.Views;
-using Microsoft.Extensions.DependencyInjection;
 using Syncfusion.Maui.Calendar;
 using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Microsoft.EntityFrameworkCore;
 
 namespace TrainingApp.UI.Views;
 
@@ -23,9 +19,8 @@ public partial class PopupCalendarPage : Popup
 
         _applicationDbContext = App.Services.GetService<ApplicationDbContext>();
         _routine = _applicationDbContext.Routines.Where(x => x.Id == routine.Id).FirstOrDefault();
-        //_routineDates = _applicationDbContext.RoutineDates.AsNoTracking().Where(x => x.RoutineId == routine.Id).ToList();
 
-        this.calendar.SelectedDates = new ObservableCollection<DateTime>(_routine.DateTimes);//.Select(x => x.Date));
+        this.calendar.SelectedDates = new ObservableCollection<DateTime>(_routine.DateTimes);
     }
 
     private void Button_Clicked(object sender, EventArgs e)
@@ -48,8 +43,6 @@ public partial class PopupCalendarPage : Popup
         if (newValue.Count > oldValue.Count)
         {
             var addedDate = newValue.Where(x => !oldValue.Contains(x)).FirstOrDefault();
-            //_applicationDbContext.RoutineDates.Add(new RoutineDates { RoutineId = _routine.Id, Routine = _routine, Date = addedDate });
-            //_routine.Dates.Add(new RoutineDates { RoutineId = _routine.Id, Routine = _routine, Date = addedDate });
             _routine.DateTimes.Add(addedDate);
             try 
             {
@@ -64,9 +57,6 @@ public partial class PopupCalendarPage : Popup
         else
         {
             var removedDate = oldValue.Where(x => !newValue.Contains(x)).FirstOrDefault();
-            //var removed = _routineDates.Where(x => x.Date == removedDate).FirstOrDefault();
-            //_routineDates.Remove(removed);
-            //_applicationDbContext.RoutineDates.Remove(removed);
             _routine.DateTimes.Remove(removedDate);
             try
             {

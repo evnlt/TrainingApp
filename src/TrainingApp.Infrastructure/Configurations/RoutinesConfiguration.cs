@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using TrainingApp.Application.Entities;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Newtonsoft.Json;
 
 namespace TrainingApp.Infrastructure.Configurations;
 
@@ -15,8 +14,6 @@ internal class RoutinesConfiguration : IEntityTypeConfiguration<Routine>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Name).HasMaxLength(64).IsRequired();
-
-        //builder.HasMany(x => x.Dates).WithOne(x => x.Routine).HasForeignKey(x => x.RoutineId);
 
         builder.Property(x => x.DateTimes).HasConversion(new DateTimeCollectionConverter());
     }

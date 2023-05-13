@@ -21,8 +21,6 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<RoutineExcersices> RoutineExcersices { get; set; }
 
-    //public DbSet<RoutineDates> RoutineDates { get; set; }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -33,7 +31,6 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         builder.ApplyConfiguration(new WorkoutExcersicesConfiguration());
         builder.ApplyConfiguration(new RoutinesConfiguration());
         builder.ApplyConfiguration(new RoutineExcersicesConfiguration());
-        //builder.ApplyConfiguration(new RoutineDatesConfiguration());
 
         builder.Entity<Workout>().HasData(
         new Workout

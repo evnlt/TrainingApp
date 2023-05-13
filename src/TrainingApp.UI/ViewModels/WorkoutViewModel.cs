@@ -25,7 +25,13 @@ public partial class WorkoutViewModel : BaseViewModel
 
     public void Load()
     {
-        var excercises = Workout.WorkoutExcersices.Select(x => x.Excercise);
+        var w = _applicationDbContext.Workouts.Where(x => x.Id == Workout.Id).Include(x => x.WorkoutExcersices).FirstOrDefault();
+        var excercises = new List<Excercise>();
+        foreach (var item in w.WorkoutExcersices)
+        {
+            var ex = _applicationDbContext.Excercises.Where(x => x.Id == item.ExcerciseId).FirstOrDefault();
+            excercises.Add(ex);
+        }
         Excercises = new ObservableCollection<Excercise>(excercises);
         OnPropertyChanged(nameof(Excercises));
     }

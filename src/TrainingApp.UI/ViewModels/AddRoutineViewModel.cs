@@ -36,6 +36,7 @@ public class AddRoutineViewModel : BaseViewModel
         var routine = new Routine
         {
             Name = _name,
+            DateTimes = new List<DateTime>()
         };
 
         _applicationDbContext.Routines
