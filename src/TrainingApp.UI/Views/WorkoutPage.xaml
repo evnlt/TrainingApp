@@ -16,6 +16,8 @@
             VerticalOptions="Center" 
             HorizontalOptions="Start" />
 
+        <Button Text="Delete" Command="{Binding DeleteCommand}" />
+
         <ContentView>
             <CollectionView
                     ItemsSource="{Binding Excercises}"

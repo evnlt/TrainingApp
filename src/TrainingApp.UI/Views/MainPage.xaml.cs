@@ -36,5 +36,11 @@ public partial class MainPage : ContentPage
         var newDate = selectedDate.AddDays(1);
         datePicker.Date = newDate;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await vm.Refresh();
+    }
 }
 

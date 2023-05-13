@@ -128,4 +128,30 @@ public partial class HomeViewModel : BaseViewModel, INotifyPropertyChanged
             {"DateTime", SelectedDate }
         });
     }
+
+    public async Task Refresh()
+    {
+        if (IsBusy)
+            return;
+
+        IsBusy = true;
+        //IsRefreshing = true;
+
+        var workouts = _applicationDbContext.Workouts
+                    .Where(w => w.Date.Date == _selectedDate.Date)
+                    .ToList();
+
+        Workouts = new ObservableCollection<Workout>(workouts);
+        OnPropertyChanged(nameof(Workouts));
+
+        var routines = _applicationDbContext.Routines.ToList();
+
+        routines = routines.Where(x => x.DateTimes.Contains(_selectedDate)).ToList();
+
+        Routines = new ObservableCollection<Routine>(routines);
+        OnPropertyChanged(nameof(Routines));
+
+        IsBusy = false;
+        //IsRefreshing = false;
+    }
 }
