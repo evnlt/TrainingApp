@@ -118,4 +118,14 @@ public partial class HomeViewModel : BaseViewModel, INotifyPropertyChanged
         Routines.Remove(routine);
         Workouts.Add(newWorkout);
     }
+
+    [RelayCommand]
+    async Task AddWorkout()
+    {
+
+        await Shell.Current.GoToAsync(nameof(AddWorkoutPage), true, new Dictionary<string, object>
+        {
+            {"DateTime", SelectedDate }
+        });
+    }
 }
