@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingApp.UI.Views.SetPage"
+             xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
+             xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
+             x:DataType="viewmodel:SetViewModel"
+             Title="">
+
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="{Binding WorkoutExcersices.Excercise.Name}"
+                   Style="{StaticResource LabelMedium}"/>
+
+            <Button
+            Padding="10"
+            Margin="20"
+            Command="{Binding AddSetCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Style="{StaticResource ButtonOutline}"
+            Text="Add" />
+        </HorizontalStackLayout>
+
+        <CollectionView
+                    ItemsSource="{Binding Sets}"
+                    SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Set">
+                    <Grid Padding="10">
+                        <HorizontalStackLayout>
+                            <VerticalStackLayout>
+                                <Label Text="Kg"></Label>
+                                <Entry BackgroundColor="Grey" Text="{Binding Measure}" 
+                                       ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SetViewModel}}, Path=ChangeMeasureCommand}"
+                                            ReturnCommandParameter="{Binding .}"
+                                       Keyboard="Numeric"/>
+                            </VerticalStackLayout>
+
+
+                            <VerticalStackLayout>
+                                <Label Text="Reps"></Label>
+                                <Entry BackgroundColor="Grey" Text="{Binding Reps}" 
+                                       ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SetViewModel}}, Path=ChangeRepsCommand}"
+                                            ReturnCommandParameter="{Binding .}"
+                                       Keyboard="Numeric"/>
+                            </VerticalStackLayout>
+
+                            <!--<Button Text="X" 
+                                    HorizontalOptions="End"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=DeleteExcerciseCommand}"
+                                        CommandParameter="{Binding .}"/>-->
+                        </HorizontalStackLayout>
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+
+
+</ContentPage>

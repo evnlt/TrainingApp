@@ -11,8 +11,8 @@ using TrainingApp.Infrastructure;
 namespace TrainingApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230514111349_Init1")]
-    partial class Init1
+    [Migration("20230514142622_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,21 +44,21 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7e660b7a-2318-463f-a388-f949ad9bc319"),
+                            Id = new Guid("cf56841e-ef9a-4c15-aab8-3cf2487e76af"),
                             ExcersiceType = 0,
                             IsBuiltIn = true,
                             Name = "Pullups"
                         },
                         new
                         {
-                            Id = new Guid("764edd5d-fece-4b67-9e02-33e817270879"),
+                            Id = new Guid("42efd1bf-124c-482e-bbb4-12dd1a9f9b7b"),
                             ExcersiceType = 0,
                             IsBuiltIn = true,
                             Name = "Ab curl"
                         },
                         new
                         {
-                            Id = new Guid("65da74cd-821d-41ba-a9bc-a068eb14940e"),
+                            Id = new Guid("982d6450-8384-4535-b3a7-d4371f9acba5"),
                             ExcersiceType = 1,
                             IsBuiltIn = false,
                             Name = "Custom 1"
@@ -87,13 +87,13 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("892b3c08-7529-4079-8ce4-9e2ca199eba8"),
+                            Id = new Guid("64986f99-5c45-4725-b0aa-c8ae1e0c42ec"),
                             DateTimes = "",
                             Name = "Abs"
                         },
                         new
                         {
-                            Id = new Guid("484e81b1-84d7-4724-abdd-a6cd491fbab3"),
+                            Id = new Guid("89413f12-9a28-486b-a2e0-13b9f6f936cc"),
                             DateTimes = "",
                             Name = "Pull"
                         });
@@ -135,9 +135,6 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.Property<int>("Reps")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("WorkoutExcerciseId")
-                        .HasColumnType("TEXT");
-
                     b.Property<Guid>("WorkoutId")
                         .HasColumnType("TEXT");
 
@@ -174,21 +171,21 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4c4b8fb1-30ab-46ce-81e8-61df9310af28"),
+                            Id = new Guid("32ad43e3-c931-4b89-a20a-35e3d15474ab"),
                             Date = new DateTime(2023, 5, 14, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = false,
                             Name = "Abs"
                         },
                         new
                         {
-                            Id = new Guid("cfa4351a-64a2-42b8-808d-ce2e0cd8bac5"),
+                            Id = new Guid("b1d6ef22-030d-4d46-99d9-2513b4085795"),
                             Date = new DateTime(2023, 5, 14, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = false,
                             Name = "Pull"
                         },
                         new
                         {
-                            Id = new Guid("ad3b51e5-3c67-4b6c-915b-875c8c6d36e5"),
+                            Id = new Guid("a8adfce9-2680-434a-a652-6e84b98c1023"),
                             Date = new DateTime(2023, 5, 13, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = true,
                             Name = "Abs"

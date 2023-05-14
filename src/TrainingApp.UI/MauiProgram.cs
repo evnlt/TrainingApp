@@ -27,7 +27,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient((services) =>
         {
-            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite010.db3"));
+            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite011.db3"));
         });
 
         builder.Services.AddSingleton<HomeViewModel>();
@@ -62,6 +62,9 @@ public static class MauiProgram
 
         builder.Services.AddTransient<AddExcerciseToWorkoutViewModel>();
         builder.Services.AddTransient<AddExcerciseToWorkoutPage>();
+
+        builder.Services.AddTransient<SetViewModel>();
+        builder.Services.AddTransient<SetPage>();
 
         return builder.Build();
     }

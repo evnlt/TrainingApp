@@ -40,14 +40,22 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Excercise">
                         <Grid Padding="10">
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding Name}" />
-                                <Button Text="X" 
+                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=GoToSetCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Name}" />
+                                    <Button Text="X" 
+                                            BackgroundColor="Red"
                                     HorizontalOptions="End"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=DeleteExcerciseCommand}"
                                         CommandParameter="{Binding .}"/>
-                            </HorizontalStackLayout>
-
+                                </HorizontalStackLayout>
+                            </Frame>
                             <Grid.GestureRecognizers>
                                 <DragGestureRecognizer
                                         CanDrag="True"

@@ -121,6 +121,26 @@ public partial class WorkoutViewModel : BaseViewModel
         //IsRefreshing = false;
     }
 
+    [RelayCommand]
+    async Task GoToSet(Excercise excercise)
+    {
+        if (excercise == null)
+            return;
+
+        var w = _applicationDbContext.Workouts
+            .Where(x => x.Id == Workout.Id)
+            .Include(w => w.WorkoutExcersices)
+            .ThenInclude(x => x.Sets)
+            .FirstOrDefault();
+
+        var we = w.WorkoutExcersices.Where(x => x.ExcerciseId == excercise.Id).FirstOrDefault();
+
+        await Shell.Current.GoToAsync(nameof(SetPage), true, new Dictionary<string, object>
+        {
+            {"WorkoutExcersices", we }
+        });
+    }
+
 
 
 
