@@ -5,7 +5,8 @@
              xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
              xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
              x:DataType="viewmodel:WorkoutViewModel"
-             Title="">
+             Title=""
+             x:Name="WorkoutContainer">
     <VerticalStackLayout>
         <Label 
             Text="{Binding Workout.Name}"
@@ -39,12 +40,30 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Excercise">
                         <Grid Padding="10">
-                            <Label Text="{Binding Name}" />
-                            <Button Text="X" 
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Name}" />
+                                <Button Text="X" 
                                     HorizontalOptions="End"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=DeleteExcerciseCommand}"
                                         CommandParameter="{Binding .}"/>
+                            </HorizontalStackLayout>
+
+                            <Grid.GestureRecognizers>
+                                <DragGestureRecognizer
+                                        CanDrag="True"
+                                        DragStartingCommand="{Binding BindingContext.ItemDraggedCommand, Source={x:Reference WorkoutContainer}}"
+                                        DragStartingCommandParameter="{Binding}" />
+                                <DropGestureRecognizer
+                                        AllowDrop="True"
+                                        DragLeaveCommand="{Binding BindingContext.ItemDragLeaveCommand, Source={x:Reference WorkoutContainer}}"
+                                        DragLeaveCommandParameter="{Binding}"
+                                        DragOverCommand="{Binding BindingContext.ItemDraggedOverCommand, Source={x:Reference WorkoutContainer}}"
+                                        DragOverCommandParameter="{Binding}"
+                                        DropCommand="{Binding BindingContext.ItemDroppedCommand, Source={x:Reference WorkoutContainer}}"
+                                        DropCommandParameter="{Binding}" />
+                            </Grid.GestureRecognizers>
                         </Grid>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
@@ -27,13 +28,20 @@ public partial class WorkoutViewModel : BaseViewModel
 
     public void Load()
     {
-        var w = _applicationDbContext.Workouts.Where(x => x.Id == Workout.Id).Include(x => x.WorkoutExcersices).FirstOrDefault();
+        /*var w = _applicationDbContext.Workouts.Where(x => x.Id == Workout.Id).Include(x => x.WorkoutExcersices).FirstOrDefault();
         var excercises = new List<Excercise>();
         foreach (var item in w.WorkoutExcersices)
         {
             var ex = _applicationDbContext.Excercises.Where(x => x.Id == item.ExcerciseId).FirstOrDefault();
             excercises.Add(ex);
-        }
+        }*/
+
+        var excercises = _applicationDbContext.WorkoutExcersices
+           .Where(x => x.WorkoutId == Workout.Id)
+           .OrderBy(x => x.Order)
+           .Select(x => x.Excercise)
+           .ToList();
+
         Excercises = new ObservableCollection<Excercise>(excercises);
         OnPropertyChanged(nameof(Excercises));
     }
@@ -111,5 +119,67 @@ public partial class WorkoutViewModel : BaseViewModel
 
         IsBusy = false;
         //IsRefreshing = false;
+    }
+
+
+
+
+
+
+    private Excercise _itemBeingDragged;
+
+    [RelayCommand]
+    public void ItemDragged(Excercise ex)
+    {
+        _itemBeingDragged = ex;
+    }
+
+    [RelayCommand]
+    public void ItemDragLeave(Excercise ex)
+    {
+    }
+
+    [RelayCommand]
+    public void ItemDraggedOver(Excercise ex)
+    {
+    }
+
+    [RelayCommand]
+    public async Task ItemDropped(Excercise excercise)
+    {
+        try
+        {
+            var itemToMove = _itemBeingDragged;
+            var itemToInsertBefore = excercise;
+            if (itemToMove == null || itemToInsertBefore == null || itemToMove == itemToInsertBefore)
+                return;
+            int insertAtIndex = Excercises.IndexOf(itemToInsertBefore);
+            if (insertAtIndex >= 0 && insertAtIndex < Excercises.Count)
+            {
+                Excercises.Remove(itemToMove);
+                Excercises.Insert(insertAtIndex, itemToMove);
+                //itemToMove.IsBeingDragged = false;
+                //itemToInsertBefore.IsBeingDraggedOver = false;
+            }
+
+            var w = _applicationDbContext.Workouts
+                .Where(x => x.Id == Workout.Id)
+                .Include(x => x.WorkoutExcersices)
+                .FirstOrDefault();
+
+            var we = w.WorkoutExcersices;
+
+            int count = 1;
+            foreach (var e in Excercises)
+            {
+                we.Where(x => x.ExcerciseId == e.Id).FirstOrDefault().Order = count++;
+            }
+
+            await _applicationDbContext.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
     }
 }
