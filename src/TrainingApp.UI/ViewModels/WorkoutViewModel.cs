@@ -141,6 +141,20 @@ public partial class WorkoutViewModel : BaseViewModel
         });
     }
 
+    public async Task ChangeIsDone(bool value)
+    {
+        var w = _applicationDbContext.Workouts
+            .Where(x => x.Id == Workout.Id)
+            .FirstOrDefault();
+
+        w.IsDone = value;
+
+        _applicationDbContext.Workouts.Update(w);
+        await _applicationDbContext.SaveChangesAsync();
+
+        Workout.IsDone = value;
+    }
+
 
 
 

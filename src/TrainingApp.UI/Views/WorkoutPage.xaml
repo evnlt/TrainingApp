@@ -17,6 +17,9 @@
             VerticalOptions="Center" 
             HorizontalOptions="Start" />
 
+        <RadioButton Content="Done" IsChecked="{Binding Workout.IsDone}" 
+                 CheckedChanged="RadioButton_CheckedChanged"/>
+
         <Button Text="Delete" Command="{Binding DeleteCommand}" />
 
         <HorizontalStackLayout>

@@ -44,7 +44,16 @@
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=GoToWorkoutCommand}"
                                             CommandParameter="{Binding .}"/>
                                 </Frame.GestureRecognizers>
-                                <Label Text="{Binding Name}" />
+                                <Label Text="{Binding Name}" >
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsDone}" Value="True">
+                                        <Setter Property="TextColor" Value="Green" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsDone}" Value="False">
+                                        <Setter Property="TextColor" Value="Red" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                                </Label>
                             </Frame>
                         </Grid>
                     </DataTemplate>

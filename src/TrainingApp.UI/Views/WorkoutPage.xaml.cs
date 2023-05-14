@@ -19,4 +19,9 @@ public partial class WorkoutPage : ContentPage
         base.OnAppearing();
         vm.Load();
     }
+
+    private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        vm.ChangeIsDone(e.Value);
+    }
 }
