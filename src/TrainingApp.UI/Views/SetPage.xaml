@@ -5,7 +5,8 @@
              xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
              xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
              x:DataType="viewmodel:SetViewModel"
-             Title="">
+             Title=""
+             x:Name="SetsContainer">
 
     <VerticalStackLayout>
         <HorizontalStackLayout>
@@ -57,7 +58,22 @@
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=DeleteExcerciseCommand}"
                                         CommandParameter="{Binding .}"/>-->
                         </HorizontalStackLayout>
+                        <Grid.GestureRecognizers>
+                            <DragGestureRecognizer
+                                        CanDrag="True"
+                                        DragStartingCommand="{Binding BindingContext.ItemDraggedCommand, Source={x:Reference SetsContainer}}"
+                                        DragStartingCommandParameter="{Binding}" />
+                            <DropGestureRecognizer
+                                        AllowDrop="True"
+                                        DragLeaveCommand="{Binding BindingContext.ItemDragLeaveCommand, Source={x:Reference SetsContainer}}"
+                                        DragLeaveCommandParameter="{Binding}"
+                                        DragOverCommand="{Binding BindingContext.ItemDraggedOverCommand, Source={x:Reference SetsContainer}}"
+                                        DragOverCommandParameter="{Binding}"
+                                        DropCommand="{Binding BindingContext.ItemDroppedCommand, Source={x:Reference SetsContainer}}"
+                                        DropCommandParameter="{Binding}" />
+                        </Grid.GestureRecognizers>
                     </Grid>
+                    
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>

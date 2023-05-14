@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
 
@@ -106,5 +107,69 @@ public partial class SetViewModel : BaseViewModel
 
         Sets.Remove(set);
         OnPropertyChanged(nameof(Sets));
+    }
+
+
+
+    private Set _itemBeingDragged;
+
+    [RelayCommand]
+    public void ItemDragged(Set set)
+    {
+        _itemBeingDragged = set;
+    }
+
+    [RelayCommand]
+    public void ItemDragLeave(Set set)
+    {
+    }
+
+    [RelayCommand]
+    public void ItemDraggedOver(Set set)
+    {
+    }
+
+    [RelayCommand]
+    public async Task ItemDropped(Set set)
+    {
+        try
+        {
+            var itemToMove = _itemBeingDragged;
+            var itemToInsertBefore = set;
+            if (itemToMove == null || itemToInsertBefore == null || itemToMove == itemToInsertBefore)
+                return;
+            int insertAtIndex = Sets.IndexOf(itemToInsertBefore);
+            if (insertAtIndex >= 0 && insertAtIndex < Sets.Count)
+            {
+                Sets.Remove(itemToMove);
+                Sets.Insert(insertAtIndex, itemToMove);
+                //itemToMove.IsBeingDragged = false;
+                //itemToInsertBefore.IsBeingDraggedOver = false;
+            }
+
+            int count = 1;
+            foreach (var item in Sets)
+            {
+                item.Order = count++;
+            }
+
+            //var s = _applicationDbContext.Sets.Where(x => x.Id == set.Id).FirstOrDefault();
+            var we = _applicationDbContext.WorkoutExcersices.Where(x => x.WorkoutId == WorkoutExcersices.WorkoutId).Include(x => x.Sets).FirstOrDefault();
+
+            //var we = w.WorkoutExcersices;
+
+            count = 1;
+            foreach (var s1 in Sets)
+            {
+                we.Sets.Where(x => x.Id == s1.Id).FirstOrDefault().Order = count++;
+            }
+
+            _applicationDbContext.WorkoutExcersices.Update(we);
+            await _applicationDbContext.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
     }
 }

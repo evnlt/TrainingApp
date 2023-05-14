@@ -19,14 +19,4 @@ public partial class SetPage : ContentPage
         base.OnAppearing();
         vm.Load();
     }
-
-    private void Measure_TextChanged(object sender, TextChangedEventArgs e)
-    {
-
-    }
-
-    private void Reps_TextChanged(object sender, TextChangedEventArgs e)
-    {
-
-    }
 }
