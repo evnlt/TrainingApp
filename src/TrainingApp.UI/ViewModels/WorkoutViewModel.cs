@@ -75,4 +75,41 @@ public partial class WorkoutViewModel : BaseViewModel
             {"Workout", Workout }
         });
     }
+
+    [RelayCommand]
+    private async Task DeleteExcercise(Excercise excercise)
+    {
+        if (excercise == null)
+            return;
+
+        var r = _applicationDbContext.Workouts
+            .Where(x => x.Id == Workout.Id)
+            .Include(x => x.WorkoutExcersices)
+            .FirstOrDefault();
+
+        var ex = r.WorkoutExcersices.Where(x => x.Excercise == excercise).FirstOrDefault();
+
+        _applicationDbContext.WorkoutExcersices.Remove(ex);
+        await _applicationDbContext.SaveChangesAsync();
+
+        Excercises.Remove(excercise);
+        await Refresh();
+    }
+
+    private async Task Refresh()
+    {
+        if (IsBusy)
+            return;
+
+        IsBusy = true;
+        //IsRefreshing = true;
+
+        /*var excercises = await _applicationDbContext.Excercises.Where(x => !x.IsBuiltIn).ToListAsync();
+        Excercises = new ObservableCollection<Excercise>(excercises);*/
+
+        OnPropertyChanged(nameof(Excercises));
+
+        IsBusy = false;
+        //IsRefreshing = false;
+    }
 }

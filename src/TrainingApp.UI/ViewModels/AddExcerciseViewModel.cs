@@ -40,7 +40,7 @@ public partial class AddExcerciseViewModel : BaseViewModel
                 var isBuildIn = _selectedType == "BuiltIn" ? true : false;
                 var excercises = _applicationDbContext.Excercises.Where(x => x.IsBuiltIn == isBuildIn).ToList();
 
-                excercises = excercises.Where(x => !exs.Any(e => excercises.Contains(e) )).ToList();
+                excercises = excercises.Where(x => !exs.Contains(x)).ToList();
 
                 Excercises = new ObservableCollection<Excercise>(excercises);
                 OnPropertyChanged(nameof(Excercises)); 
@@ -59,7 +59,7 @@ public partial class AddExcerciseViewModel : BaseViewModel
 
         var excercises = _applicationDbContext.Excercises.Where(x => x.IsBuiltIn).ToList();
 
-        excercises = excercises.Where(x => !exs.Any(e => excercises.Contains(e))).ToList();
+        excercises = excercises.Where(x => !exs.Contains(x)).ToList();
 
         Excercises = new ObservableCollection<Excercise>(excercises);
         OnPropertyChanged(nameof(Excercises));

@@ -93,7 +93,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     /// </summary>
     public ApplicationDbContext()
     {
-        File = Path.Combine("./", "MigratorDb008.db3");
+        File = Path.Combine("./", "MigratorDb010.db3");
         Initialize();
     }
 

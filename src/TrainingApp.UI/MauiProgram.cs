@@ -27,7 +27,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient((services) =>
         {
-            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite009.db3"));
+            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite010.db3"));
         });
 
         builder.Services.AddSingleton<HomeViewModel>();
