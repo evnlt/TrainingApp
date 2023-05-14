@@ -37,19 +37,22 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         {
             Name = "Abs",
             Date = DateTime.Today,
-            IsDone = false
+            IsDone = false,
+            WorkoutExcersices = new List<WorkoutExcersices>()
         },
         new Workout
         {
             Name = "Pull",
             Date = DateTime.Today,
-            IsDone = false
+            IsDone = false,
+            WorkoutExcersices = new List<WorkoutExcersices>()
         },
         new Workout
         {
             Name = "Abs",
             Date = DateTime.Today.AddDays(-1),
-            IsDone = true
+            IsDone = true,
+            WorkoutExcersices = new List<WorkoutExcersices>()
         });
 
         builder.Entity<Routine>().HasData(
@@ -90,7 +93,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     /// </summary>
     public ApplicationDbContext()
     {
-        File = Path.Combine("./", "MigratorDb007.db3");
+        File = Path.Combine("./", "MigratorDb008.db3");
         Initialize();
     }
 

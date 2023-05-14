@@ -10,6 +10,6 @@ public class Workout
 
     public bool IsDone { get; set; }
 
-    public ICollection<WorkoutExcersices> WorkoutExcersices { get; set; } = default!;
+    public ICollection<WorkoutExcersices> WorkoutExcersices { get; set; } = new List<WorkoutExcersices>();
 
 }

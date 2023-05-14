@@ -14,5 +14,12 @@ public class WorkoutExcersices
 
     public int Order { get; set; }
 
-    public ICollection<Set> Sets { get; set; } = default!;
+    public ICollection<Set> Sets { get; set; } = new List<Set>();
+}
+
+public struct WorkoutExcerciseId
+{
+    public Guid WorkoutId { get; set; }
+
+    public Guid ExerciseId { get; set; }
 }

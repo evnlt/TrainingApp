@@ -18,6 +18,19 @@
 
         <Button Text="Delete" Command="{Binding DeleteCommand}" />
 
+        <HorizontalStackLayout>
+            <Label Text="Excercises"
+                   Style="{StaticResource LabelMedium}"/>
+
+            <Button
+            Padding="10"
+            Margin="20"
+            Command="{Binding AddExcerciseCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Style="{StaticResource ButtonOutline}"
+            Text="Add" />
+        </HorizontalStackLayout>
+
         <ContentView>
             <CollectionView
                     ItemsSource="{Binding Excercises}"

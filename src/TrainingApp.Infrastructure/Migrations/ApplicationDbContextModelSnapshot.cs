@@ -41,21 +41,21 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("176a0e0b-38c7-463d-a59d-17ee04ff0f3b"),
+                            Id = new Guid("7e660b7a-2318-463f-a388-f949ad9bc319"),
                             ExcersiceType = 0,
                             IsBuiltIn = true,
                             Name = "Pullups"
                         },
                         new
                         {
-                            Id = new Guid("858bdf43-cd98-4815-be2f-3be235aa0490"),
+                            Id = new Guid("764edd5d-fece-4b67-9e02-33e817270879"),
                             ExcersiceType = 0,
                             IsBuiltIn = true,
                             Name = "Ab curl"
                         },
                         new
                         {
-                            Id = new Guid("92c58b1b-ad38-47c8-b5d3-671ed5f0151f"),
+                            Id = new Guid("65da74cd-821d-41ba-a9bc-a068eb14940e"),
                             ExcersiceType = 1,
                             IsBuiltIn = false,
                             Name = "Custom 1"
@@ -84,13 +84,13 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("62204757-cf51-43bf-afe8-2e76856803e9"),
+                            Id = new Guid("892b3c08-7529-4079-8ce4-9e2ca199eba8"),
                             DateTimes = "",
                             Name = "Abs"
                         },
                         new
                         {
-                            Id = new Guid("2001029b-a621-4966-9424-28ee2f972a56"),
+                            Id = new Guid("484e81b1-84d7-4724-abdd-a6cd491fbab3"),
                             DateTimes = "",
                             Name = "Pull"
                         });
@@ -120,6 +120,9 @@ namespace TrainingApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("ExcerciseId")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Measure")
                         .HasColumnType("INTEGER");
 
@@ -132,9 +135,14 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.Property<Guid>("WorkoutExcerciseId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("WorkoutId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("WorkoutExcerciseId");
+                    b.HasIndex("ExcerciseId");
+
+                    b.HasIndex("WorkoutId", "ExcerciseId");
 
                     b.ToTable("Sets", (string)null);
                 });
@@ -163,22 +171,22 @@ namespace TrainingApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("812ecad2-38b5-4f74-a277-96a9832fbbc9"),
-                            Date = new DateTime(2023, 5, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("4c4b8fb1-30ab-46ce-81e8-61df9310af28"),
+                            Date = new DateTime(2023, 5, 14, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = false,
                             Name = "Abs"
                         },
                         new
                         {
-                            Id = new Guid("7b9f13eb-b1e0-437a-abb2-7a54a9a4111d"),
-                            Date = new DateTime(2023, 5, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("cfa4351a-64a2-42b8-808d-ce2e0cd8bac5"),
+                            Date = new DateTime(2023, 5, 14, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = false,
                             Name = "Pull"
                         },
                         new
                         {
-                            Id = new Guid("d77e11a1-e19c-48c9-944c-69be3c7a05e3"),
-                            Date = new DateTime(2023, 5, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Id = new Guid("ad3b51e5-3c67-4b6c-915b-875c8c6d36e5"),
+                            Date = new DateTime(2023, 5, 13, 0, 0, 0, 0, DateTimeKind.Local),
                             IsDone = true,
                             Name = "Abs"
                         });
@@ -186,24 +194,21 @@ namespace TrainingApp.Infrastructure.Migrations
 
             modelBuilder.Entity("TrainingApp.Application.Entities.WorkoutExcersices", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("WorkoutId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ExcerciseId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("WorkoutId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
+                    b.HasKey("WorkoutId", "ExcerciseId");
 
                     b.HasIndex("ExcerciseId");
-
-                    b.HasIndex("WorkoutId");
 
                     b.ToTable("WorkoutExcercises", (string)null);
                 });
@@ -229,11 +234,27 @@ namespace TrainingApp.Infrastructure.Migrations
 
             modelBuilder.Entity("TrainingApp.Application.Entities.Set", b =>
                 {
-                    b.HasOne("TrainingApp.Application.Entities.WorkoutExcersices", "WorkoutExcercises")
-                        .WithMany("Sets")
-                        .HasForeignKey("WorkoutExcerciseId")
+                    b.HasOne("TrainingApp.Application.Entities.Excercise", "Excercise")
+                        .WithMany()
+                        .HasForeignKey("ExcerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("TrainingApp.Application.Entities.Workout", "Workout")
+                        .WithMany()
+                        .HasForeignKey("WorkoutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TrainingApp.Application.Entities.WorkoutExcersices", "WorkoutExcercises")
+                        .WithMany("Sets")
+                        .HasForeignKey("WorkoutId", "ExcerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Excercise");
+
+                    b.Navigation("Workout");
 
                     b.Navigation("WorkoutExcercises");
                 });

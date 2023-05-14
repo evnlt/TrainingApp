@@ -66,4 +66,13 @@ public partial class WorkoutViewModel : BaseViewModel
 
         await Shell.Current.GoToAsync("//MainPage");
     }
+
+    [RelayCommand]
+    public async Task AddExcercise()
+    {
+        await Shell.Current.GoToAsync(nameof(AddExcerciseToWorkoutPage), true, new Dictionary<string, object>
+        {
+            {"Workout", Workout }
+        });
+    }
 }
