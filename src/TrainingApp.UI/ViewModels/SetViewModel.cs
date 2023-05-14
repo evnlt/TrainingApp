@@ -85,4 +85,26 @@ public partial class SetViewModel : BaseViewModel
         s.Reps = set.Reps;
         await _applicationDbContext.SaveChangesAsync();
     }
+
+    [RelayCommand]
+    public async Task DeleteSet(Set set)
+    {
+        var s = _applicationDbContext.Sets.Where(x => x.Id == set.Id).FirstOrDefault();
+        var we = _applicationDbContext.WorkoutExcersices.Where(x => x.WorkoutId == WorkoutExcersices.WorkoutId).Include(x => x.Sets).FirstOrDefault();
+
+        we.Sets.Remove(s);
+        _applicationDbContext.Sets.Remove(s);
+
+        var count = 1;
+        foreach (var item in we.Sets)
+        {
+            item.Order = count++;
+        }
+
+        _applicationDbContext.WorkoutExcersices.Update(we);
+        await _applicationDbContext.SaveChangesAsync();
+
+        Sets.Remove(set);
+        OnPropertyChanged(nameof(Sets));
+    }
 }
