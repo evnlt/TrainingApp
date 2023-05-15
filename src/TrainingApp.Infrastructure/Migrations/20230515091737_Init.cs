@@ -144,9 +144,9 @@ namespace TrainingApp.Infrastructure.Migrations
                 columns: new[] { "Id", "ExcersiceType", "IsBuiltIn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("42efd1bf-124c-482e-bbb4-12dd1a9f9b7b"), 0, true, "Ab curl" },
-                    { new Guid("982d6450-8384-4535-b3a7-d4371f9acba5"), 1, false, "Custom 1" },
-                    { new Guid("cf56841e-ef9a-4c15-aab8-3cf2487e76af"), 0, true, "Pullups" }
+                    { new Guid("1d779375-d296-4a2b-8bde-765c557ff14b"), 1, false, "Custom 1" },
+                    { new Guid("679e02cf-0280-4f4b-bee8-e11fe604dc0c"), 0, true, "Ab curl" },
+                    { new Guid("fbb04f18-988b-4dfb-82c3-9fef7c617854"), 0, true, "Pullups" }
                 });
 
             migrationBuilder.InsertData(
@@ -154,8 +154,8 @@ namespace TrainingApp.Infrastructure.Migrations
                 columns: new[] { "Id", "DateTimes", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("64986f99-5c45-4725-b0aa-c8ae1e0c42ec"), "", "Abs" },
-                    { new Guid("89413f12-9a28-486b-a2e0-13b9f6f936cc"), "", "Pull" }
+                    { new Guid("5afe3a1a-ec6e-41d1-8614-3e6b215c2a39"), "", "Pull" },
+                    { new Guid("b7e012e0-43a6-4b2a-83f0-c857c552b914"), "", "Abs" }
                 });
 
             migrationBuilder.InsertData(
@@ -163,9 +163,9 @@ namespace TrainingApp.Infrastructure.Migrations
                 columns: new[] { "Id", "Date", "IsDone", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("32ad43e3-c931-4b89-a20a-35e3d15474ab"), new DateTime(2023, 5, 14, 0, 0, 0, 0, DateTimeKind.Local), false, "Abs" },
-                    { new Guid("a8adfce9-2680-434a-a652-6e84b98c1023"), new DateTime(2023, 5, 13, 0, 0, 0, 0, DateTimeKind.Local), true, "Abs" },
-                    { new Guid("b1d6ef22-030d-4d46-99d9-2513b4085795"), new DateTime(2023, 5, 14, 0, 0, 0, 0, DateTimeKind.Local), false, "Pull" }
+                    { new Guid("cdae0387-51ea-434c-a5da-f4797971c34a"), new DateTime(2023, 5, 14, 0, 0, 0, 0, DateTimeKind.Local), true, "Abs" },
+                    { new Guid("d4813f8f-82b5-4e0d-b9b9-f30029e2800a"), new DateTime(2023, 5, 15, 0, 0, 0, 0, DateTimeKind.Local), false, "Pull" },
+                    { new Guid("f027b0c5-ffe9-4a69-8c0d-224c9ced2acb"), new DateTime(2023, 5, 15, 0, 0, 0, 0, DateTimeKind.Local), false, "Abs" }
                 });
 
             migrationBuilder.CreateIndex(

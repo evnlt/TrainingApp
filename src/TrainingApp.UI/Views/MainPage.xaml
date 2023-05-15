@@ -8,11 +8,14 @@
     x:DataType="viewmodel:HomeViewModel"
     Title="{Binding Title}">
 
-    <VerticalStackLayout>
-        <HorizontalStackLayout>
+    <StackLayout BackgroundColor="{StaticResource PageBackground}">
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Button 
-                Text="←"
+                Text="◄"
+                TextColor="White"
+                BackgroundColor="Transparent"
                 Clicked="OnDayBeforeClicked"
+                
                 HorizontalOptions="Start"/>
 
             <DatePicker 
@@ -23,78 +26,97 @@
                 DateSelected="DatePicker_DateSelected"/>
 
             <Button 
-                Text="→"
-                Clicked="OnDayAfterClicked"
-                HorizontalOptions="End"/>
+                Text="►"
+                TextColor="White"
+                BackgroundColor="Transparent"
+                
+                HorizontalOptions="End"
+                
+                Clicked="OnDayAfterClicked"/>
 
         </HorizontalStackLayout>
 
-        <ContentView>
-            <CollectionView
+        <HorizontalStackLayout>
+            <Label Text="Workouts" VerticalOptions="Start" Margin="10,0,0,0"/>
+        </HorizontalStackLayout>
+        
+        <StackLayout Margin="0,20,0,0">
+
+            <ContentView>
+                <CollectionView
                     ItemsSource="{Binding Workouts}"
                     SelectionMode="None">
 
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Workout">
-                        <Grid Padding="10">
-                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer 
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Workout">
+                            <Grid Padding="10">
+                                <Frame HeightRequest="80" Style="{StaticResource CardView}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=GoToWorkoutCommand}"
                                             CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                                <Label Text="{Binding Name}" >
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding IsDone}" Value="True">
-                                        <Setter Property="TextColor" Value="Green" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Label" Binding="{Binding IsDone}" Value="False">
-                                        <Setter Property="TextColor" Value="Red" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                                </Label>
-                            </Frame>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-                
-                
-            </CollectionView>
-        </ContentView>
+                                    </Frame.GestureRecognizers>
+                                    <Label Text="{Binding Name}" VerticalOptions="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsDone}" Value="True">
+                                                <Setter Property="TextColor" Value="Green" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsDone}" Value="False">
+                                                <Setter Property="TextColor" Value="Red" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
-        <Button
-            Padding="10"
-            Margin="20"
-            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=AddWorkoutCommand}"
-            IsEnabled="{Binding IsNotBusy}"
-            Style="{StaticResource ButtonOutline}"
-            Text="Add" />
 
-        <ContentView>
-            <CollectionView
+                </CollectionView>
+            </ContentView>
+
+            <Button
+                Padding="12"
+                Margin="10"
+                Text="Add"
+                HorizontalOptions="End"
+            
+                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=AddWorkoutCommand}"
+                IsEnabled="{Binding IsNotBusy}" />
+        </StackLayout>
+
+        <HorizontalStackLayout>
+            <Label Text="Routines" VerticalOptions="Start" Margin="10,20,0,0"/>
+        </HorizontalStackLayout>
+        <StackLayout Margin="0,20,0,20" VerticalOptions="FillAndExpand">
+            <ContentView>
+                <CollectionView
                     ItemsSource="{Binding Routines}"
                     SelectionMode="None">
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Routine">
-                        <Grid Padding="10">
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding Name}" />
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Routine">
+                            <Grid Padding="10">
+                                <Frame HeightRequest="80" Style="{StaticResource CardView}">
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding Name}" />
 
-                                <Button
+                                        <Button
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=StartRoutineCommand}"
                                             CommandParameter="{Binding .}"
                                 Text=">"
                                 VerticalOptions="End"/>
-                            </HorizontalStackLayout>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ContentView>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </StackLayout>
 
-    </VerticalStackLayout>
+    </StackLayout>
 
 
 </ContentPage>

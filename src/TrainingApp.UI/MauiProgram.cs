@@ -2,7 +2,6 @@
 using TrainingApp.Infrastructure;
 using TrainingApp.UI.ViewModels;
 using TrainingApp.UI.Views;
-using C1.Maui;
 using Syncfusion.Maui.Core.Hosting;
 using CommunityToolkit.Maui;
 
@@ -27,7 +26,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient((services) =>
         {
-            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite011.db3"));
+            return new ApplicationDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite012.db3"));
         });
 
         builder.Services.AddSingleton<HomeViewModel>();

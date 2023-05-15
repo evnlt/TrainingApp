@@ -19,7 +19,7 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Dark=Black, Light=White}" />
+                <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Dark=ShellBackground, Light=White}" />
                 <Setter Property="Shell.ForegroundColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
                 <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
@@ -43,19 +43,21 @@
                 ApplyToDerivedTypes="True"
                 Class="FlyoutItemLayoutStyle"
                 TargetType="Layout">
-                <Setter Property="BackgroundColor" Value="LightBlue" />
-                <Setter Property="VisualStateManager.VisualStateGroups">
+                <Setter Property="BackgroundColor" Value="{StaticResource SelectedTabBackground}" />
+                
+                    <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="Transparent" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource SelectedTabBackground}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource SelectedTabForeground}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
