@@ -6,7 +6,7 @@
     xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
     x:Class="TrainingApp.UI.Views.MainPage"
     x:DataType="viewmodel:HomeViewModel"
-    Title="{Binding Title}">
+    Title="Home">
 
     <StackLayout BackgroundColor="{StaticResource PageBackground}">
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
@@ -99,14 +99,19 @@
                         <DataTemplate x:DataType="model:Routine">
                             <Grid Padding="10">
                                 <Frame HeightRequest="80" Style="{StaticResource CardView}">
-                                    <HorizontalStackLayout>
-                                        <Label Text="{Binding Name}" />
+                                    <HorizontalStackLayout >
+                                        <Label Text="{Binding Name}" 
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start"
+                                               Margin="0,0,220,0"/>
 
                                         <Button
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=StartRoutineCommand}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=StartRoutineCommand}"
                                             CommandParameter="{Binding .}"
-                                Text=">"
-                                VerticalOptions="End"/>
+                                            Text=">"
+                                            VerticalOptions="End"
+                                            HorizontalOptions="End"
+                                            BackgroundColor="{StaticResource ShellBackground}"/>
                                     </HorizontalStackLayout>
                                 </Frame>
                             </Grid>
