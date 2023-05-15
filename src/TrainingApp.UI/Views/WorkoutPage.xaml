@@ -7,64 +7,68 @@
              x:DataType="viewmodel:WorkoutViewModel"
              Title=""
              x:Name="WorkoutContainer">
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding Workout.Name}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Start" />
-        <Label 
+
+    <StackLayout>
+
+
+        <VerticalStackLayout>
+            <Label 
             Text="{Binding Workout.Date, StringFormat='{0:dd.MM}'}"
             VerticalOptions="Center" 
-            HorizontalOptions="Start" />
+            HorizontalOptions="Center"
+            Margin="0,10,0,0"/>
 
-        <RadioButton Content="Done" IsChecked="{Binding Workout.IsDone}" 
-                 CheckedChanged="RadioButton_CheckedChanged"/>
+            <HorizontalStackLayout>
+                <Label 
+                    Text="{Binding Workout.Name}"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start"
+                    Margin="10,10,240,0"/>
+                    
+                <Button Text="Delete" 
+                        Command="{Binding DeleteCommand}" 
+                        HorizontalOptions="End"
+                        BackgroundColor="#95362b"/>
+            </HorizontalStackLayout>
 
-        <Button Text="Delete" Command="{Binding DeleteCommand}" />
+            <RadioButton Content="Done" 
+                         IsChecked="{Binding Workout.IsDone}" 
+                         CheckedChanged="RadioButton_CheckedChanged"
+                         Margin="2,10,0,0"/>
 
-        <HorizontalStackLayout>
-            <Label Text="Excercises"
-                   Style="{StaticResource LabelMedium}"/>
+            
 
-            <Button
-            Padding="10"
-            Margin="20"
-            Command="{Binding AddExcerciseCommand}"
-            IsEnabled="{Binding IsNotBusy}"
-            Style="{StaticResource ButtonOutline}"
-            Text="Add" />
-        </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Excercises"
+                       Style="{StaticResource LabelMedium}"
+                       Margin="10,30,00,0"/>
 
-        <ContentView>
-            <CollectionView
+                <Button
+                    Padding="0,0,0,0"
+                    Margin="20"
+                    Command="{Binding AddExcerciseCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Text="Add" />
+            </HorizontalStackLayout>
+
+            <ContentView>
+                <CollectionView
                     ItemsSource="{Binding Excercises}"
                     SelectionMode="None">
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Excercise">
-                        <Grid Padding="10">
-                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer 
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Excercise">
+                            <Grid Padding="10">
+                                <Frame HeightRequest="80" Style="{StaticResource CardView}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=GoToSetCommand}"
                                             CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-
-                                <HorizontalStackLayout>
-                                    <Label Text="{Binding Name}" />
-                                    <Button Text="X" 
-                                            BackgroundColor="Red"
-                                    HorizontalOptions="End"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=DeleteExcerciseCommand}"
-                                        CommandParameter="{Binding .}"/>
-                                </HorizontalStackLayout>
-                            </Frame>
-                            <Grid.GestureRecognizers>
-                                <DragGestureRecognizer
+                                        <DragGestureRecognizer
                                         CanDrag="True"
                                         DragStartingCommand="{Binding BindingContext.ItemDraggedCommand, Source={x:Reference WorkoutContainer}}"
                                         DragStartingCommandParameter="{Binding}" />
-                                <DropGestureRecognizer
+                                        <DropGestureRecognizer
                                         AllowDrop="True"
                                         DragLeaveCommand="{Binding BindingContext.ItemDragLeaveCommand, Source={x:Reference WorkoutContainer}}"
                                         DragLeaveCommandParameter="{Binding}"
@@ -72,12 +76,25 @@
                                         DragOverCommandParameter="{Binding}"
                                         DropCommand="{Binding BindingContext.ItemDroppedCommand, Source={x:Reference WorkoutContainer}}"
                                         DropCommandParameter="{Binding}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
+                                    </Frame.GestureRecognizers>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ContentView>
-    </VerticalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding Name}" Margin="0,0,210,0"/>
+                                        <Button Text="X" 
+                                                BackgroundColor="#95362b"
+                                                HorizontalOptions="End"
+                                                VerticalOptions="End"
+                                                Margin="0,0,0,0"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=DeleteExcerciseCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </VerticalStackLayout>
+    </StackLayout>
 </ContentPage>

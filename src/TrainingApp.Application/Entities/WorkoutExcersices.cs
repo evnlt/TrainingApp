@@ -2,6 +2,7 @@
 
 public class WorkoutExcersices
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid WorkoutId { get; set; }
 

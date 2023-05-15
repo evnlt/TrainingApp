@@ -93,14 +93,19 @@ public partial class AddExcerciseToWorkoutViewModel : BaseViewModel
             //.Include(w => w.RoutineExcersices)
             .FirstOrDefault();
 
-        w.WorkoutExcersices.Add(new WorkoutExcersices
+        var ex = _applicationDbContext.Excercises
+            .Where(x => x.Id == excercise.Id)
+            .FirstOrDefault();
+
+        var we = new WorkoutExcersices
         {
-            WorkoutId = Workout.Id,
-            Workout = Workout,
-            ExcerciseId = excercise.Id,
-            Excercise = excercise,
-            Order = w.WorkoutExcersices.Count
-        });
+            WorkoutId = w.Id,
+            Workout = w,
+            ExcerciseId = ex.Id,
+            Excercise = ex,
+            Order = w.WorkoutExcersices.Count + 1
+        };
+        _applicationDbContext.WorkoutExcersices.Add(we);
 
         await _applicationDbContext.SaveChangesAsync();
 
