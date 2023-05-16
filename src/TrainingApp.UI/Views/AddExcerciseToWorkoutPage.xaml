@@ -5,17 +5,19 @@
              xmlns:model="clr-namespace:TrainingApp.Application.Entities;assembly=TrainingApp.Application"
              xmlns:viewmodel="clr-namespace:TrainingApp.UI.ViewModels"
              x:DataType="viewmodel:AddExcerciseToWorkoutViewModel"
-             Title="">
+             Title="Add excercise">
 
 
-    <VerticalStackLayout>
-        <StackLayout Padding="20">
+    <VerticalStackLayout BackgroundColor="{StaticResource PageForeground}">
+        <StackLayout Padding="20"
+                     HorizontalOptions="Fill">
 
             <HorizontalStackLayout
                 RadioButtonGroup.SelectedValue="{Binding SelectedType}">
                 <RadioButton Content="Built-in"
                  Value="BuiltIn" IsChecked="True"
-                 CheckedChanged="RadioButton_CheckedChanged"/>
+                 CheckedChanged="RadioButton_CheckedChanged"
+                             Margin="10,0,70,0"/>
                 <RadioButton Content="Custom"
                  Value="Custom"
                  CheckedChanged="RadioButton_CheckedChanged"/>
@@ -28,7 +30,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Excercise">
                         <Grid Padding="10">
-                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                            <Frame HeightRequest="80" Style="{StaticResource CardView}">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer 
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AddExcerciseToWorkoutViewModel}}, Path=AddExcerciseCommand}"
