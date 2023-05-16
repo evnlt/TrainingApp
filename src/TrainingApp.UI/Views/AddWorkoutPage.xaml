@@ -8,12 +8,13 @@
 
 
 
-    <VerticalStackLayout>
-        <StackLayout Padding="20">
+    <VerticalStackLayout BackgroundColor="{StaticResource PageForeground}">
+        <StackLayout Padding="20" >
 
             <Label Text="Name:"
-                   Style="{StaticResource LabelMedium}"/>
-            <Entry BackgroundColor="Grey" Text="{Binding Name, Mode=TwoWay}" />
+                   Style="{StaticResource LabelMedium}"
+                   Margin="0,0,0,10"/>
+            <Entry BackgroundColor="Transparent" Text="{Binding Name, Mode=TwoWay}" />
 
 
             <ActivityIndicator
@@ -23,9 +24,10 @@
                 VerticalOptions="Center" />
 
             <Button
-                Padding="20,0"
+                BackgroundColor="{StaticResource ShellBackground}"
+                Margin="10,20,0,0"
                 Command="{Binding SaveCommand}"
-                HorizontalOptions="Center"
+                HorizontalOptions="End"
                 IsEnabled="{Binding IsNotBusy}"
                 Text="Save"
                 VerticalOptions="EndAndExpand"

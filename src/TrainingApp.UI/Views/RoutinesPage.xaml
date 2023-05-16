@@ -32,8 +32,8 @@
         </ContentView>
 
         <Button
-            Padding="10"
-            Margin="20"
+            BackgroundColor="{StaticResource ShellBackground}"
+            Margin="0,0,20,20"
             HorizontalOptions="End"
 		    VerticalOptions="End"
             Command="{Binding AddCommand}"

@@ -77,6 +77,7 @@
             </ContentView>
 
             <Button
+                BackgroundColor="{StaticResource ShellBackground}"
                 Padding="12"
                 Margin="10"
                 Text="Add"
@@ -97,6 +98,7 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Routine">
+                           
                             <Grid Padding="10">
                                 <Frame HeightRequest="80" Style="{StaticResource CardView}">
                                     <HorizontalStackLayout >
