@@ -10,11 +10,12 @@
         <Label 
             Text="Pick Dates"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" 
+            Margin="0,10,0,0"/>
 
         <sf:SfCalendar x:Name="calendar" SelectionMode="Multiple"
                              SelectionChanged="calendar_SelectionChanged" />
 
-        <Button Text="Close" Clicked="Button_Clicked" />
+        <Button Text="Close" Clicked="Button_Clicked" Margin="60,0,60,10"/>
     </VerticalStackLayout>
 </mct:Popup>
