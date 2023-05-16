@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using TrainingApp.Application.Entities;
 using TrainingApp.Infrastructure;
 
@@ -31,7 +32,7 @@ public partial class SetViewModel : BaseViewModel
         Sets = new ObservableCollection<Set>(WorkoutExcersices.Sets.OrderBy(x => x.Order));
         OnPropertyChanged(nameof(Sets));
 
-        if(WorkoutExcersices.Excercise.ExcersiceType == Application.Enums.ExcersiceType.Weight) 
+        if (WorkoutExcersices.Excercise.ExcersiceType == Application.Enums.ExcersiceType.Weight)
         {
             MeasureName = "Kg";
         }
@@ -72,7 +73,7 @@ public partial class SetViewModel : BaseViewModel
     [RelayCommand]
     public async Task ChangeMeasure(Set set)
     {
-        var s = _applicationDbContext.Sets.Where(x => x.Id == set.Id).FirstOrDefault();   
+        var s = _applicationDbContext.Sets.Where(x => x.Id == set.Id).FirstOrDefault();
 
         s.Measure = set.Measure;
         await _applicationDbContext.SaveChangesAsync();

@@ -8,10 +8,13 @@
              Title=""
              x:Name="SetsContainer">
 
+
     <VerticalStackLayout>
         <HorizontalStackLayout>
             <Label Text="{Binding WorkoutExcersices.Excercise.Name}"
-                   Style="{StaticResource LabelMedium}"/>
+                   FontSize="Large"
+                   VerticalOptions="Center"
+                   Margin="10,0,0,0"/>
 
             <Button
             Padding="10"
@@ -28,30 +31,41 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Set">
-                    <Grid Padding="10">
+                    <Grid Padding="10" BackgroundColor="{StaticResource PageForeground}">
                         <HorizontalStackLayout>
-                            <VerticalStackLayout>
+                            <Label Text="{Binding Order, StringFormat='{0}.'}" 
+                                   VerticalOptions="Start"
+                                   HorizontalOptions="Start"
+                                   Margin="0,0,30,0"/>
+
+                            <VerticalStackLayout Margin="0,0,20,0">
                                 <Label Text="Kg"></Label>
-                                <Entry BackgroundColor="Grey" Text="{Binding Measure}" 
+                                <Entry BackgroundColor="{StaticResource FrameBackground}" 
+                                       Margin="0,10,0,0"
+                                       Text="{Binding Measure}" 
                                        ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SetViewModel}}, Path=ChangeMeasureCommand}"
-                                            ReturnCommandParameter="{Binding .}"
+                                       ReturnCommandParameter="{Binding .}"
                                        Keyboard="Numeric"/>
                             </VerticalStackLayout>
 
 
-                            <VerticalStackLayout>
+                            <VerticalStackLayout Margin="0,0,140,0">
                                 <Label Text="Reps"></Label>
-                                <Entry BackgroundColor="Grey" Text="{Binding Reps}" 
+                                <Entry BackgroundColor="{StaticResource FrameBackground}" 
+                                       Margin="0,10,0,0"
+                                       Text="{Binding Reps}" 
                                        ReturnCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SetViewModel}}, Path=ChangeRepsCommand}"
-                                            ReturnCommandParameter="{Binding .}"
+                                       ReturnCommandParameter="{Binding .}"
                                        Keyboard="Numeric"/>
                             </VerticalStackLayout>
 
                             <Button Text="X" 
-                                            BackgroundColor="Red"
+                                    BackgroundColor="#95362b"
+                                    Margin="0,20,0,20"
                                     HorizontalOptions="End"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SetViewModel}}, Path=DeleteSetCommand}"
-                                        CommandParameter="{Binding .}"/>
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SetViewModel}}, Path=DeleteSetCommand}"
+                                    CommandParameter="{Binding .}"/>
 
                             <!--<Button Text="X" 
                                     HorizontalOptions="End"
