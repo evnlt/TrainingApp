@@ -7,11 +7,8 @@
              x:DataType="viewmodel:BuiltInExercisesViewModel"
              Title="Excercises">
 
-    <VerticalStackLayout>
-        <Label 
-            Text="Built-In exercises content"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout
+        BackgroundColor="{StaticResource PageForeground}">
 
         <ContentView>
             <CollectionView
@@ -21,7 +18,9 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Excercise">
                         <Grid Padding="10">
-                            <Label Text="{Binding Name}" />
+                            <Frame HeightRequest="80" Style="{StaticResource CardView}">
+                                <Label Text="{Binding Name}" />
+                            </Frame>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

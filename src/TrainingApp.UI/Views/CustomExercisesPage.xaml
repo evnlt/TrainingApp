@@ -7,7 +7,10 @@
              x:DataType="viewmodel:CustomExercisesViewModel"
              Title="Excercises">
 
-    <Grid>
+    <VerticalStackLayout
+        BackgroundColor="{StaticResource PageForeground}"
+        HorizontalOptions="FillAndExpand">
+        
         <ContentView>
             <CollectionView
                     ItemsSource="{Binding Excercises}"
@@ -16,7 +19,9 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Excercise">
                         <Grid Padding="10">
-                            <Label Text="{Binding Name}" />
+                            <Frame HeightRequest="80" Style="{StaticResource CardView}">
+                                <Label Text="{Binding Name}" />
+                            </Frame>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -24,8 +29,9 @@
         </ContentView>
 
         <Button
+            BackgroundColor="{StaticResource ShellBackground}"
+            Margin="0,450,10,0"
             Padding="10"
-            Margin="20"
             HorizontalOptions="End"
 		    VerticalOptions="End"
             Command="{Binding AddCommand}"
@@ -34,7 +40,7 @@
             Text="Add" />
 
 
-    </Grid>
+    </VerticalStackLayout>
 
 
 </ContentPage>
