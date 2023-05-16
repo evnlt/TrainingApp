@@ -10,36 +10,29 @@
              xmlns:sf="clr-namespace:Syncfusion.Maui.Calendar;assembly=Syncfusion.Maui.Calendar">
 
     <VerticalStackLayout>
-        <Label Text="Name:"
-                   Style="{StaticResource LabelMedium}"/>
 
-        <Entry BackgroundColor="Grey" Text="{Binding Routine.Name, Mode=TwoWay}" />
+        <Entry 
+            Margin="10,10,170,0"
+            BackgroundColor="Transparent" 
+            Text="{Binding Routine.Name, Mode=TwoWay}" />
 
-        <HorizontalStackLayout>
-            <Label Text="Dates"
-                   Style="{StaticResource LabelMedium}"/>
-
-            <!--<Button
-            Padding="10"
-            Margin="20"
-            Command="{Binding AddCommand}"
-            IsEnabled="{Binding IsNotBusy}"
-            Style="{StaticResource ButtonOutline}"
-            Text="Add" />-->
-            
-            <!--<c1:C1Calendar x:Name="calendar" SelectionMode="Multiple"
-                             SelectionChanged="calendar_SelectionChanged"/>-->
-
-            <!--<sf:SfCalendar x:Name="calendar" SelectionMode="Multiple"
-                             SelectionChanged="calendar_SelectionChanged" />-->
+        <HorizontalStackLayout Margin="10,20,0,0">
+            <Label
+                VerticalOptions="Center"
+                Margin="0,0,10,0"
+                Text="Dates"
+                Style="{StaticResource LabelMedium}"/>
 
             <Button Text="Pick dates..." Clicked="Button_Clicked"></Button>
 
         </HorizontalStackLayout>
 
-        <HorizontalStackLayout>
-            <Label Text="Excercises"
-                   Style="{StaticResource LabelMedium}"/>
+        <HorizontalStackLayout Margin="10,20,0,0">
+            <Label
+                VerticalOptions="Center"
+                Margin="0,0,10,0"
+                Text="Excercises"
+                Style="{StaticResource LabelMedium}"/>
 
             <Button
             Padding="10"
@@ -52,19 +45,27 @@
 
 
         <ContentView>
-            <CollectionView
+            <VerticalStackLayout>
+                <CollectionView
                     ItemsSource="{Binding Excercises}"
                     SelectionMode="None">
 
+                
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Excercise">
-                        <Grid Padding="10">
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding Name}" />
-                                <Button Text="X"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EditRoutineViewModel}}, Path=DeleteExcerciseCommand}"
-                                        CommandParameter="{Binding .}"></Button>
-                            </HorizontalStackLayout>
+                        <Grid Padding="10" BackgroundColor="{StaticResource PageForeground}" VerticalOptions="EndAndExpand">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" 
+                                       Margin="0,0,240,0"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+                                <Button 
+                                    BackgroundColor="#95362b"
+                                    HorizontalOptions="End"
+                                    Text="X"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EditRoutineViewModel}}, Path=DeleteExcerciseCommand}"
+                                    CommandParameter="{Binding .}"></Button>
+                            </VerticalStackLayout>
                             
                             <Grid.GestureRecognizers>
                                 <DragGestureRecognizer
@@ -85,6 +86,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </VerticalStackLayout>
         </ContentView>
     </VerticalStackLayout>
 </ContentPage>
